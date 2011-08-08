@@ -1,0 +1,28 @@
+!quiet=1
+;Set up IDL paths
+!Path = './idl' + ':' + $
+	'./idl/gen' + ':' + $
+	'./idl/noaa' + ':' + $
+	'./idl/SFC_Filament_pack' + ':' + $
+	'./idl/helio' + ':' + !Path
+
+;cd,'idl'
+;.r run_smart_arg.pro
+;.r mdi_getfiles.pro
+;.r stage_smart_arg.pro
+;cd,'..'
+
+; THIS ARE the input params. 
+; First date: 01-jan-1996
+; Last date : today
+; 
+; Expected run time : 
+; a) ~10 minutes/day with downloading
+; b) ~2-3 minutes/day without downloading
+;
+; Minumum granularity : 1 day
+; Maximum granularity : undefined
+;
+; Download size 60 mb /day
+;
+; Output size: negligible

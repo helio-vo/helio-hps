@@ -1,0 +1,3 @@
+set ftp:proxy http://proxy.cs.tcd.ie:8080/
+user helio Eli0hf6
+open ftp://ftpbass2000.obspm.fr/pub/helio/test/

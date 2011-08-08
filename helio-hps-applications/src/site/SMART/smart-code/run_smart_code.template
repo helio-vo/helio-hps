@@ -1,0 +1,8 @@
+Executable = "run_smart_code.sh";
+StdOutput = "std.out";
+StdError = "std.err";
+OutputSandbox = {"std.out","std.err"};
+InputSandbox = {"/home/pierantg/helio-code/smart-code/run_smart_code.sh", "/home/pierantg/helio-code/smart-code/smart_system_test.tar.gz"};
+Requirements = other.GlueCEPolicyMaxCPUTime > 1620 && other.GlueCEPolicyMaxWallClockTime > 1620;
+Rank = -other.GlueCEStateEstimatedResponseTime;
+VirtualOrganisation="vo.helio-vo.eu";

@@ -1,0 +1,33 @@
+This set contains the detections produced by SMART code for the year 2009
+
+Files on this set:
+      	 hfc1test_schema_SMART.sql
+	 ar_observatory.csv
+	 ar_observation.csv
+	 ar_frc.csv
+	 ar_results.csv
+
+Files description:
+      hfc1test_schema_SMART.sql:  SMART schema. Copied from the filaments schema
+      ar_observatory.csv: file with the data entry for the observatory table. 
+      ar_observation.csv: file with the fits headers info of the images used.
+      ar_frc.csv: file with the feature detection code info.
+      ar_results.csv:  file with the final detections of SMART
+
+Instructions in MySQL:
+	     /* STEPS!!
+	     !!! drop database hfc1test; !!!  Deletes the database!
+	     source hfc1test_schema_SMART.sql;
+	     use hfc1test;
+	     load data local infile 'ar_observatory.csv' into table observatory fields terminated by ';';
+	     load data local infile 'ar_observation.csv' into table observations fields terminated by ';' IGNORE 1 LINES;
+	     load data local infile 'ar_frc.csv' into table FRC_INFO fields terminated by ';' IGNORE 1 LINES;
+	     load data local infile 'ar_results.csv' into table  ACTIVEREGIONS fields terminated by ';' IGNORE 1 LINES;
+	     */
+
+Date Info:
+     set created  23/Sept/2010	
+
+Tested and it works without any warning or error message on 23/Sept/2010
+Query OK, 3987 rows affected (0.29 sec)
+Records: 3987  Deleted: 0  Skipped: 0  Warnings: 0
