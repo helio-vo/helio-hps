@@ -1,0 +1,34 @@
+;sdo_ss_launcher.batch
+;IDL batch file to launch sdo_ss_launcher.pro from a script
+;SolarSoftWare with vso, sdo, and ontlogy packages must be loaded.
+;
+;To run the batch file on an idl session -> @sdo_ss_launcher.batch
+;
+;X.Bonnin, 01-AUG-2011
+
+;Define paths
+ss_dir = '/Users/xavier/LESIA/Solaire/HELIO/HFC/Features/SunSpots' ;-> Main directory
+data_dir = ss_dir + '/Data/SDO/HMI' 							   ;-> SDO/HMI local data directory
+sdoss_dir = ss_dir + '/SDOSS' 									   ;-> Code source directory
+output_dir = sdoss_dir + '/Products' 							   ;-> Products (png, csv, etc.) directory
+
+;Add to !PATH variable or compile extra idl routines required to run the code
+.compile vso_get
+!PATH = !PATH+':'+sdoss_dir+'/AUX'
+
+;Define time range to process
+starttime = '2011-07-01T00:00:00'
+endtime = '2011-07-01T12:00:00'
+
+;Comments:
+;write_fits=0 -> No output fits  
+;scf=4 -> SOHO/MDI resolution (i.e. 1024 x 1024)
+;/CSV -> create csv files instead of xml ones.
+;/PNG -> create png SDO/HMI Ic image of the Sun + detection results (= snapshot)
+;/CLEAN -> delete input SDO/HMI fits file after processing (to free space on local disk)
+;(/LOCAL) -> Use this keyword if SDO/HMI data are already downloaded (by default the sdo_ss_launcher routine will download data from VSO server, in the data_dir, if it is specified, in the current directory else). if /LOCAL is set, you can specify the data files directory using data_dir optional input parameter.
+
+sdo_ss_launcher,starttime,endtime,$
+				data_dir=data_dir,output_dir=output_dir,$
+				sample=720,$
+				write_fits=0,scf=4,/CSV,/PNG,/CLEAN;,/LOCAL
