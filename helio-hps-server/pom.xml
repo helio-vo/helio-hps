@@ -221,12 +221,10 @@
 		</dependency>
 
 		<!-- HELIO Shared - Utilities -->
-		<!-- 
 		<dependency>
 			<groupId>eu.heliovo</groupId>
 			<artifactId>helio-shared</artifactId>
 			<version>5.0-SNAPSHOT</version>
 		</dependency>
-		-->
 	</dependencies>
 </project>
