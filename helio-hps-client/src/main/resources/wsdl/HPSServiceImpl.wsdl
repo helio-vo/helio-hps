@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="HPSServiceImpl" targetNamespace="http://server.hps.heliovo.eu/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://server.hps.heliovo.eu/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://server.hps.heliovo.eu/" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://server.hps.heliovo.eu/">
+  <xsd:element name="test" type="tns:test"/>
+  <xsd:complexType name="test">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="arg" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="testResponse" type="tns:testResponse"/>
+  <xsd:complexType name="testResponse">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="return" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="test">
+    <wsdl:part name="parameters" element="tns:test">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="testResponse">
+    <wsdl:part name="parameters" element="tns:testResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="HPSServiceImplPortType">
+    <wsdl:operation name="test">
+      <wsdl:input name="test" message="tns:test">
+    </wsdl:input>
+      <wsdl:output name="testResponse" message="tns:testResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="HPSServiceImplSoapBinding" type="tns:HPSServiceImplPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="test">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="test">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="testResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="HPSServiceImpl">
+    <wsdl:port name="HPSServiceImplPort" binding="tns:HPSServiceImplSoapBinding">
+      <soap:address location="http://localhost:9090/HPSServiceImplPort"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
