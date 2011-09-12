@@ -17,5 +17,6 @@
 	</description>
 	<modules>
 		<module>helio-hps-applications</module>
+		<module>helio-hps-server</module>
 	</modules>
 </project>
