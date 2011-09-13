@@ -19,10 +19,11 @@ public class HPSServiceClientDemo
 	private void perform() 
 	{		
 		HPSServiceImplPortType	hpsService	=	hpsSI.getHPSServiceImplPort();
+
 		((BindingProvider)hpsService).getRequestContext().put(
 				BindingProvider.ENDPOINT_ADDRESS_PROPERTY,
 				"http://localhost:8080/helio-hps-server/hpsService");
-//				"http://cagnode58.cs.tcd.ie:8080/helio-example-server/exampleService");
+//				"http://cagnode58.cs.tcd.ie:8080/helio-hps-server/hpsService");
 
 		System.out.println(hpsService.test("Hello there !!"));
 	}
