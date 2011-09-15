@@ -71,7 +71,7 @@ public class HPSServiceImplDemo
 			System.out.println();
 
 			if (key.equals("0") 
-					|| key.equals("1") 
+//					|| key.equals("1") 
 //					|| key.equals("2")
 //					|| key.equals("3") 
 //					|| key.equals("4") 
@@ -88,17 +88,17 @@ public class HPSServiceImplDemo
 						e.printStackTrace();
 					}					
 				} 
-				if (key.equals("1")) 
-				{
-					try 
-					{
-						getApplicationList();
-					} 
-					catch (Exception e) 
-					{
-						e.printStackTrace();
-					}					
-				} 
+//				if (key.equals("1")) 
+//				{
+//					try 
+//					{
+//						getApplicationList();
+//					} 
+//					catch (Exception e) 
+//					{
+//						e.printStackTrace();
+//					}					
+//				} 
 //				else if (key.equals("2")) 
 //				{
 //					logUtilities.printShortLogEntry("Selecting and running an application on the hps...");
@@ -150,17 +150,17 @@ public class HPSServiceImplDemo
 	}
 
 
-	private void getApplicationList() 
-	{
-		logUtilities.printShortLogEntry("Getting the list of present applications on the HPS");
-		presentApplications.addAll(hpsService.getPresentApplications());
-		System.out.println("----------------------------------------------------------------------------");					
-		for(int n=0; n < presentApplications.size(); n++)		
-		{
-			System.out.println("[" + n + "] - " + presentApplications.get(n).getDescription());			
-		}
-		System.out.println("----------------------------------------------------------------------------");			
-	}
+//	private void getApplicationList() 
+//	{
+//		logUtilities.printShortLogEntry("Getting the list of present applications on the HPS");
+//		presentApplications.addAll(hpsService.getPresentApplications());
+//		System.out.println("----------------------------------------------------------------------------");					
+//		for(int n=0; n < presentApplications.size(); n++)		
+//		{
+//			System.out.println("[" + n + "] - " + presentApplications.get(n).getDescription());			
+//		}
+//		System.out.println("----------------------------------------------------------------------------");			
+//	}
 
 	private void performSimpleTest() 
 	{
