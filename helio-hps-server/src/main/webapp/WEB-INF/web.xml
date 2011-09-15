@@ -4,7 +4,6 @@
     <display-name>HELIO-Processing-Service</display-name>
     <description>HELIO Processing Server</description>
 
-	
 	<!-- Where Spring is to load its bean definitions from. -->
     <context-param>
 		<!--  This is the place where Spring gets its configuration  -->

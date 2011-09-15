@@ -69,7 +69,10 @@
 						<id>process-classes</id>
 						<phase>process-classes</phase>
 						<configuration>
+							<!--  
 							<className>eu.heliovo.hps.server.HPSServiceImpl</className>
+							-->
+							<className>eu.heliovo.hps.server.HPSService</className>
 							<genWsdl>true</genWsdl>
 							<verbose>true</verbose>
 						</configuration>

@@ -10,7 +10,6 @@ import javax.jws.WebService;
 
 import eu.heliovo.hps.server.application.AbstractApplicationDescription;
 
-
 @WebService
 public interface HPSService 
 {
@@ -22,12 +21,14 @@ public interface HPSService
 	@WebMethod
 	@WebResult(name="testResult")
 	public	String	test(@WebParam(name="testParameter") String testParemeter);
-
+	
 	/**
 	 * getPresentApplications
 	 */
 	@WebMethod
+	@WebResult(name="presentApplications")
 	public	Collection<AbstractApplicationDescription> getPresentApplications();
+
 	
 //	@WebMethod
 //	public String getStatusOfExecution(String exeId);
