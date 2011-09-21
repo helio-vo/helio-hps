@@ -3,8 +3,11 @@ package eu.heliovo.hps.server;
 import java.util.Collection;
 
 import eu.heliovo.hps.server.application.AbstractApplicationDescription;
+import eu.heliovo.hps.server.application.ApplicationEngine;
 import eu.heliovo.hps.server.application.ApplicationRepository;
+import eu.heliovo.hps.server.application.DummyApplicationEngine;
 import eu.heliovo.hps.server.application.DummyApplicationRepository;
+import eu.heliovo.hps.server.application.SimpleApplicationEngine;
 import eu.heliovo.shared.common.utilities.LogUtilities;
 
 public class HPSServiceImpl implements HPSService 
@@ -17,11 +20,15 @@ public class HPSServiceImpl implements HPSService
 	 * The repository of the applications
 	 */
 	ApplicationRepository		appRepository	=	new DummyApplicationRepository();
+	/*
+	 * The engine that executes the applications
+	 */
+	ApplicationEngine			appEngine		=	new SimpleApplicationEngine();
 	
 	@Override
 	public String test(String arg) 
 	{
-		logUtilities.printShortLogEntry("HPSServiceImpl.test("+arg+")");
+		logUtilities.printShortLogEntry("HPSServiceImpl.test(...)");
 		return arg;
 	}
 
@@ -30,5 +37,33 @@ public class HPSServiceImpl implements HPSService
 	{
 		logUtilities.printShortLogEntry("HPSServiceImpl.getPresentApplications()");
 		return appRepository.getPresentApplications();
+	}
+
+	@Override
+	public String executeApplication(
+			AbstractApplicationDescription app,
+			Boolean fastExecution, 
+			int numParallelJobs)
+			throws HPSServiceException 
+	{
+		logUtilities.printShortLogEntry("HPSServiceImpl.executeApplication(...)");
+		return appEngine.executeApplication(
+				appRepository.getApplicationCompleteDescription(app.getId()), 
+				fastExecution, 
+				numParallelJobs);
+	}
+
+	@Override
+	public String getStatusOfExecution(String exeId) 
+	{
+		logUtilities.printShortLogEntry("HPSServiceImpl.getStatusOfExecution(...)");
+		return appEngine.getStatusOfExecution(exeId);
+	}
+
+	@Override
+	public String getOutputOfExecution(String exeId) throws HPSServiceException 
+	{
+		logUtilities.printShortLogEntry("HPSServiceImpl.getOutputOfExecution(...)");
+		return appEngine.getOutputOfExecution(exeId);
 	}	
 }
