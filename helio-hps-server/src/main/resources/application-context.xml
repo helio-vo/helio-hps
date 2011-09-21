@@ -53,9 +53,11 @@
 	</security:authentication-manager>
 	-->
 	
+	<!--  Verbose Logging 
 	<cxf:bus>
 		<cxf:features>
 			<cxf:logging />
 		</cxf:features>
 	</cxf:bus>
+	-->
 </beans>
