@@ -5,7 +5,8 @@ public interface ApplicationEngine
 	String executeApplication(
 			CompleteApplicationDescription app,
 			Boolean fastExecution, 
-			int numParallelJobs);
+			int numParallelJobs) throws ProcessingEngineException;
+	
 	String getStatusOfExecution(String exeId);
 	String getOutputOfExecution(String exeId);
 }

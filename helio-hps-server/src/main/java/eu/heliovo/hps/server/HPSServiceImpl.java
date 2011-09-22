@@ -7,6 +7,7 @@ import eu.heliovo.hps.server.application.ApplicationEngine;
 import eu.heliovo.hps.server.application.ApplicationRepository;
 import eu.heliovo.hps.server.application.DummyApplicationEngine;
 import eu.heliovo.hps.server.application.DummyApplicationRepository;
+import eu.heliovo.hps.server.application.ProcessingEngineException;
 import eu.heliovo.hps.server.application.SimpleApplicationEngine;
 import eu.heliovo.shared.common.utilities.LogUtilities;
 
@@ -23,7 +24,7 @@ public class HPSServiceImpl implements HPSService
 	/*
 	 * The engine that executes the applications
 	 */
-	ApplicationEngine			appEngine		=	new SimpleApplicationEngine();
+	static	ApplicationEngine	appEngine		=	new SimpleApplicationEngine();
 	
 	@Override
 	public String test(String arg) 
@@ -47,10 +48,18 @@ public class HPSServiceImpl implements HPSService
 			throws HPSServiceException 
 	{
 		logUtilities.printShortLogEntry("HPSServiceImpl.executeApplication(...)");
-		return appEngine.executeApplication(
-				appRepository.getApplicationCompleteDescription(app.getId()), 
-				fastExecution, 
-				numParallelJobs);
+		try 
+		{
+			return appEngine.executeApplication(
+					appRepository.getApplicationCompleteDescription(app.getId()), 
+					fastExecution, 
+					numParallelJobs);
+		} 
+		catch (ProcessingEngineException e) 
+		{
+			e.printStackTrace();
+			throw new HPSServiceException("Execution of application failed !");
+		}
 	}
 
 	@Override

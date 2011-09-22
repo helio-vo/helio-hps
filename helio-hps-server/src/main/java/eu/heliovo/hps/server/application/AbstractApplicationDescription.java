@@ -4,10 +4,10 @@ import java.util.Vector;
 
 public class AbstractApplicationDescription 
 {
-	String							name;
-	String							id;
-	String							description;
-	Vector<ApplicationParameter>	parameters;
+	String							name			=	null;
+	String							id				=	null;
+	String							description		=	null;
+	Vector<ApplicationParameter>	parameters		=	null;
 	
 	public AbstractApplicationDescription() 
 	{
@@ -97,6 +97,8 @@ public class AbstractApplicationDescription
 		this.description = description;
 	}
 
+	
+	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
