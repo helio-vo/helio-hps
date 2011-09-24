@@ -48,6 +48,10 @@ public class HPSServiceImpl implements HPSService
 			throws HPSServiceException 
 	{
 		logUtilities.printShortLogEntry("HPSServiceImpl.executeApplication(...)");
+		logUtilities.printLongLogEntry("Executing the following application : " + app.getFullDescription());
+		
+		logUtilities.printLongLogEntry(" xxx " + app.getParameters());
+		
 		try 
 		{
 			return appEngine.executeApplication(

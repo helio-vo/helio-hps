@@ -118,12 +118,13 @@ public class HPSServiceImplTest {
 		logUtilities.printShortLogEntry("... done");
 	}
 
+	@Ignore
 	@Test
 	public void testExecuteApplications() {
 		/*
 		 * The number of test applications
 		 */
-		int numOfApps = 100;
+		int numOfApps = 1;
 		/*
 		 * The vector of running applications
 		 */

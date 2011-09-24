@@ -36,6 +36,10 @@ public class SimpleApplicationEngine implements ApplicationEngine
 				app,
 				fastExecution,
 				numParallelJobs);
+		System.out.println("SimpleApplicationEngine.executeApplication - exedesc is " + exeDesc.appDesc.toString());
+		System.out.println("SimpleApplicationEngine.executeApplication - params are " + exeDesc.appDesc.parameters);
+		logUtilities.printLongLogEntry(" xxx " + app.getParameters());
+
 		/*
 		 * Find the best job execution engine to run this application
 		 */

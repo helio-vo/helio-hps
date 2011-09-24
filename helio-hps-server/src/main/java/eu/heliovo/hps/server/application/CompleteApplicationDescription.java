@@ -90,5 +90,25 @@ public class CompleteApplicationDescription extends AbstractApplicationDescripti
 		res		+=		jdlFile;
 		res		+=		"]";
 		return res;
-	}	
+	}
+
+	@Override
+	public String getDescription() 
+	{
+		return toString();
+	}
+
+	@Override
+	public String getFullDescription() 
+	{
+		String	res		=	super.getFullDescription();
+		res		+=		"[";
+		res		+=		location;
+		res		+=		",";
+		res		+=		exeFile;
+		res		+=		",";
+		res		+=		jdlFile;
+		res		+=		"]";
+		return res;
+	}		
 }

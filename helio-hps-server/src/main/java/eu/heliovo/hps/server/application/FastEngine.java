@@ -22,9 +22,12 @@ public class FastEngine extends GenericProcessingEngine
 	@Override
 	protected boolean execute(ApplicationExecutionDescription exeDesc) 
 	{
+		logUtilities.printLongLogEntry(" xxx " + exeDesc.appDesc.getParameters());
+
 //		logUtilities.printShortLogEntry("Running Scripts : " + runningScripts);
 //		logUtilities.printShortLogEntry("ApplicationExecutionDescription : " + exeDesc);
 		SimpleScriptController	controller	=	new SimpleScriptController();
+		controller.setAppExeDesc(exeDesc);
 		controller.start();
 		runningScripts.put(exeDesc.appExeId, controller);
 //		logUtilities.printShortLogEntry("Running Scripts : " + runningScripts);

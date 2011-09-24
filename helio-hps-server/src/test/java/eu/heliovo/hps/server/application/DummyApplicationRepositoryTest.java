@@ -2,6 +2,7 @@ package eu.heliovo.hps.server.application;
 
 import static org.junit.Assert.*;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import eu.heliovo.shared.common.utilities.LogUtilities;
@@ -18,7 +19,7 @@ public class DummyApplicationRepositoryTest
 		logUtilities.printLongLogEntry(appRepository.getPresentApplications().toString());
 	}
 
-	@Test
+	@Ignore @Test
 	public void testGetApplication() 
 	{
 		String appId	=	"app_1";
@@ -27,7 +28,7 @@ public class DummyApplicationRepositoryTest
 		logUtilities.printLongLogEntry(appRepository.getApplication(appId).toString());
 	}
 
-	@Test
+	@Ignore @Test
 	public void testGetApplicationCompleteDescription() 
 	{
 		String appId	=	"app_1";
@@ -35,5 +36,4 @@ public class DummyApplicationRepositoryTest
 		logUtilities.printShortLogEntry("Get the complete description of " + appId);
 		logUtilities.printLongLogEntry(appRepository.getApplicationCompleteDescription(appId).toString());
 	}
-
 }

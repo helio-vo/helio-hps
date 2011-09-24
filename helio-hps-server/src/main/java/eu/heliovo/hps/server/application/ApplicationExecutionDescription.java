@@ -73,6 +73,14 @@ public class ApplicationExecutionDescription
 		return startedOn;
 	}
 
+	public CompleteApplicationDescription getAppDesc() {
+		return appDesc;
+	}
+
+	public void setAppDesc(CompleteApplicationDescription appDesc) {
+		this.appDesc = appDesc;
+	}
+
 	@Override
 	public String toString() 
 	{
