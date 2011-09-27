@@ -1,19 +1,16 @@
 package eu.heliovo.hps.client;
 
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Vector;
 
 import javax.xml.ws.BindingProvider;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import eu.heliovo.hps.server.AbstractApplicationDescription;
 import eu.heliovo.hps.server.ApplicationParameter;
 import eu.heliovo.hps.server.HPSService;
-import eu.heliovo.hps.server.HPSServiceException;
 import eu.heliovo.hps.server.HPSServiceService;
 import eu.heliovo.shared.common.utilities.LogUtilities;
 
@@ -198,7 +195,7 @@ public class HPSServiceImplTest
 		/*
 		 * The number of test applications
 		 */
-		int numOfApps = 1000;
+		int numOfApps = 1;
 		/*
 		 * The vector of running applications
 		 */

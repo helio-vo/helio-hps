@@ -32,8 +32,8 @@ public class HPSServiceClientDemo
 	 * The Service Stubs
 	 */
 	HPSServiceService	hpsSS			=	new HPSServiceService();
-	String				serviceAddress	=	"http://localhost:8080/helio-hps-server/hpsService";
-//	String  			serviceAddress	=	"http://cagnode58.cs.tcd.ie:8080/helio-hps-server/hpsService");
+//	String				serviceAddress	=	"http://localhost:8080/helio-hps-server/hpsService";
+	String  			serviceAddress	=	"http://cagnode58.cs.tcd.ie:8080/helio-hps-server/hpsService";
 
 	public static void main(String[] args) 
 	{

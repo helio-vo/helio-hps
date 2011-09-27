@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="HPSServiceService" targetNamespace="http://server.hps.heliovo.eu/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://server.hps.heliovo.eu/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://server.hps.heliovo.eu/" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://server.hps.heliovo.eu/">
+  <xs:element name="executeApplication" type="tns:executeApplication"/>
+  <xs:element name="executeApplicationResponse" type="tns:executeApplicationResponse"/>
+  <xs:element name="getOutputOfExecution" type="tns:getOutputOfExecution"/>
+  <xs:element name="getOutputOfExecutionResponse" type="tns:getOutputOfExecutionResponse"/>
+  <xs:element name="getPresentApplications" type="tns:getPresentApplications"/>
+  <xs:element name="getPresentApplicationsResponse" type="tns:getPresentApplicationsResponse"/>
+  <xs:element name="getStatusOfExecution" type="tns:getStatusOfExecution"/>
+  <xs:element name="getStatusOfExecutionResponse" type="tns:getStatusOfExecutionResponse"/>
+  <xs:element name="test" type="tns:test"/>
+  <xs:element name="testResponse" type="tns:testResponse"/>
+  <xs:complexType name="test">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="testParameter" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="testResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="testResult" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getStatusOfExecution">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="executionId" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getStatusOfExecutionResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="executionStatus" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getOutputOfExecution">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="executionId" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getOutputOfExecutionResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="outputLocation" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="executeApplication">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="selectedApplication" type="tns:abstractApplicationDescription"/>
+      <xs:element minOccurs="0" name="fastExecution" type="xs:boolean"/>
+      <xs:element name="numOfParallelJobs" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="abstractApplicationDescription">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="description" type="xs:string"/>
+      <xs:element minOccurs="0" name="id" type="xs:string"/>
+      <xs:element minOccurs="0" name="name" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="parameters" nillable="true" type="tns:applicationParameter"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="applicationParameter">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="def" type="xs:string"/>
+      <xs:element minOccurs="0" name="name" type="xs:string"/>
+      <xs:element minOccurs="0" name="type" type="xs:string"/>
+      <xs:element minOccurs="0" name="value" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="vector">
+    <xs:complexContent>
+      <xs:extension base="tns:abstractList">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType abstract="true" name="abstractList">
+    <xs:complexContent>
+      <xs:extension base="tns:abstractCollection">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType abstract="true" name="abstractCollection">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:complexType name="executeApplicationResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="executionId" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getPresentApplications">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:complexType name="getPresentApplicationsResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="presentApplications" type="tns:abstractApplicationDescription"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="HPSServiceException" type="tns:HPSServiceException"/>
+  <xs:complexType name="HPSServiceException">
+    <xs:sequence/>
+  </xs:complexType>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getStatusOfExecutionResponse">
+    <wsdl:part name="parameters" element="tns:getStatusOfExecutionResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getStatusOfExecution">
+    <wsdl:part name="parameters" element="tns:getStatusOfExecution">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getPresentApplications">
+    <wsdl:part name="parameters" element="tns:getPresentApplications">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="executeApplicationResponse">
+    <wsdl:part name="parameters" element="tns:executeApplicationResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="test">
+    <wsdl:part name="parameters" element="tns:test">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getOutputOfExecutionResponse">
+    <wsdl:part name="parameters" element="tns:getOutputOfExecutionResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="executeApplication">
+    <wsdl:part name="parameters" element="tns:executeApplication">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getPresentApplicationsResponse">
+    <wsdl:part name="parameters" element="tns:getPresentApplicationsResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="testResponse">
+    <wsdl:part name="parameters" element="tns:testResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="HPSServiceException">
+    <wsdl:part name="HPSServiceException" element="tns:HPSServiceException">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getOutputOfExecution">
+    <wsdl:part name="parameters" element="tns:getOutputOfExecution">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="HPSService">
+    <wsdl:operation name="test">
+      <wsdl:input name="test" message="tns:test">
+    </wsdl:input>
+      <wsdl:output name="testResponse" message="tns:testResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getStatusOfExecution">
+      <wsdl:input name="getStatusOfExecution" message="tns:getStatusOfExecution">
+    </wsdl:input>
+      <wsdl:output name="getStatusOfExecutionResponse" message="tns:getStatusOfExecutionResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getOutputOfExecution">
+      <wsdl:input name="getOutputOfExecution" message="tns:getOutputOfExecution">
+    </wsdl:input>
+      <wsdl:output name="getOutputOfExecutionResponse" message="tns:getOutputOfExecutionResponse">
+    </wsdl:output>
+      <wsdl:fault name="HPSServiceException" message="tns:HPSServiceException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="executeApplication">
+      <wsdl:input name="executeApplication" message="tns:executeApplication">
+    </wsdl:input>
+      <wsdl:output name="executeApplicationResponse" message="tns:executeApplicationResponse">
+    </wsdl:output>
+      <wsdl:fault name="HPSServiceException" message="tns:HPSServiceException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPresentApplications">
+      <wsdl:input name="getPresentApplications" message="tns:getPresentApplications">
+    </wsdl:input>
+      <wsdl:output name="getPresentApplicationsResponse" message="tns:getPresentApplicationsResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="HPSServiceServiceSoapBinding" type="tns:HPSService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="test">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="test">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="testResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getStatusOfExecution">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getStatusOfExecution">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getStatusOfExecutionResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="executeApplication">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="executeApplication">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="executeApplicationResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="HPSServiceException">
+        <soap:fault name="HPSServiceException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getOutputOfExecution">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getOutputOfExecution">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getOutputOfExecutionResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="HPSServiceException">
+        <soap:fault name="HPSServiceException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPresentApplications">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getPresentApplications">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getPresentApplicationsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="HPSServiceService">
+    <wsdl:port name="HPSServicePort" binding="tns:HPSServiceServiceSoapBinding">
+      <soap:address location="http://localhost:9090/HPSServicePort"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
