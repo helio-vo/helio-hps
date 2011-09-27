@@ -47,15 +47,17 @@ public class HPSServiceImpl implements HPSService
 			int numParallelJobs)
 			throws HPSServiceException 
 	{
+		/*
+		 * TODO : Remove comments...
+		 */
 		logUtilities.printShortLogEntry("HPSServiceImpl.executeApplication(...)");
-		logUtilities.printLongLogEntry("Executing the following application : " + app.getFullDescription());
-		
-		logUtilities.printLongLogEntry(" xxx " + app.getParameters());
+//		logUtilities.printLongLogEntry("Executing the following application : " + app.getFullDescription());		
+//		logUtilities.printLongLogEntry(" xxx " + app.getParameters());
 		
 		try 
 		{
 			return appEngine.executeApplication(
-					appRepository.getApplicationCompleteDescription(app.getId()), 
+					appRepository.getApplicationCompleteDescription(app), 
 					fastExecution, 
 					numParallelJobs);
 		} 

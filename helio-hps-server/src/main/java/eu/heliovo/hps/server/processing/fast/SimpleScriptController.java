@@ -33,33 +33,62 @@ public class SimpleScriptController extends Thread
 	public void setAppExeDesc(ApplicationExecutionDescription appExeDesc) 
 	{
 		this.appExeDesc = appExeDesc;
+
+//		System.out.println(" **** SimpleScriptController - parameters are " + appExeDesc.getAppDesc().getParameters());
+
 		executable	=	appExeDesc.getAppDesc().getLocation() + 
 		"/" +
 		appExeDesc.getAppDesc().getExeFile();
-		/*
-		 * Adding the parameters to the executable...
-		 */
+//		System.out.println(" **** SimpleScriptController - executable line is " + executable);
+		
+//		/*
+//		 * Adding the parameters to the executable...
+//		 */
+//		executable += " 2011-09-11T23:00 25.00 10.00 500.00 /tmp/nasikon.gab.today";
+
 		int	numOfArgs	=			appExeDesc.getAppDesc().getParameters().size();
 		for(int currArg = 0; currArg < numOfArgs; currArg++)
 		{
 			String arg = appExeDesc.getAppDesc().getParameters().get(currArg).getValue();			
-			logUtilities.printLongLogEntry("["+currArg+"]="+arg);			
+//			logUtilities.printLongLogEntry(" **** SimpleScriptController - ["+currArg+"]="+arg);			
 			executable += " " + arg;
-			logUtilities.printLongLogEntry("executable = "+executable);			
+//			logUtilities.printLongLogEntry(" **** SimpleScriptController - executable = "+executable);			
 		}
-		logFile		=	"/tmp/logFile.txt";
+		/*
+		 * Define the temporary directory where the results will be stored
+		 */
+		String 	tmpDir	=	"/var/www/html/output_dir/" + appExeDesc.getAppExeId();
+		String 	tmpFile	=	tmpDir + "/" + appExeDesc.getAppExeId();
+		/*
+		 * Create the temporary directory...
+		 */
+		sysUtilities.sysExec("mkdir " + tmpDir);
+		/*
+		 * Add the tmp dir to the parameters for saving the output
+		 */
+		executable += " " + tmpFile;		
+//		System.out.println(" **** SimpleScriptController - executable line is " + executable);
 	}
 
 	@Override
 	public void run() 
 	{		
+		String 	tmpDir	=	"/tmp/" + appExeDesc.getAppExeId();
+
 		try 
 		{
 //			logUtilities.printLongLogEntry("Executing the scripts with the new method...");
 //			String[]	commands	=	{"pwd", "cd /tmp", "pwd", executable};
 //			logUtilities.printLongLogEntry(sysUtilities.sysExec(commands));
 //			logUtilities.printLongLogEntry("...done");
-			logUtilities.printLongLogEntry("Executing the scripts with the old method...");
+			logUtilities.printLongLogEntry("Executing " + executable + " script...");
+			/*
+			 * Create the temporary directory...
+			 */
+			sysUtilities.sysExec("mkdir " + tmpDir);
+			/*
+			 * Executing the script
+			 */
 			logUtilities.printLongLogEntry(sysUtilities.sysExec(executable));
 			logUtilities.printLongLogEntry("...done");
 		} 

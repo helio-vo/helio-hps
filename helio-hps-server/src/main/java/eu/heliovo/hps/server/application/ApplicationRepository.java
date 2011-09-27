@@ -6,5 +6,6 @@ public interface ApplicationRepository
 {
 	public abstract Collection<AbstractApplicationDescription> getPresentApplications();
 	public abstract AbstractApplicationDescription getApplication(String appId);
-	public abstract CompleteApplicationDescription getApplicationCompleteDescription(String appId);
+	public abstract CompleteApplicationDescription getApplicationCompleteDescription(
+			AbstractApplicationDescription app);
 }

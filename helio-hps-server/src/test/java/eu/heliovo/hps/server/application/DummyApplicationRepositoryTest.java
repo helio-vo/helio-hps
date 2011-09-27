@@ -28,12 +28,12 @@ public class DummyApplicationRepositoryTest
 		logUtilities.printLongLogEntry(appRepository.getApplication(appId).toString());
 	}
 
-	@Ignore @Test
-	public void testGetApplicationCompleteDescription() 
-	{
-		String appId	=	"app_1";
-		
-		logUtilities.printShortLogEntry("Get the complete description of " + appId);
-		logUtilities.printLongLogEntry(appRepository.getApplicationCompleteDescription(appId).toString());
-	}
+//	@Ignore @Test
+//	public void testGetApplicationCompleteDescription() 
+//	{
+//		String appId	=	"app_1";
+//		
+//		logUtilities.printShortLogEntry("Get the complete description of " + appId);
+//		logUtilities.printLongLogEntry(appRepository.getApplicationCompleteDescription(appId).toString());
+//	}
 }

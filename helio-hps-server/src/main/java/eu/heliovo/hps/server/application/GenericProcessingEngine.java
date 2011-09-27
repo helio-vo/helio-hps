@@ -20,6 +20,9 @@ public class GenericProcessingEngine implements ProcessingEngine
 	@Override
 	public String executeApplication(ApplicationExecutionDescription exeDesc) throws ProcessingEngineException 
 	{
+		System.out.println(" **** SimpleApplicationEngine.executeApplication - exedesc is " + exeDesc.appDesc.toString());
+		System.out.println(" **** SimpleApplicationEngine.executeApplication - params are " + exeDesc.appDesc.parameters);
+		
 		String appExeId	=	exeUtilities.getExecutionId();			
 		/*
 		 * Add the execution id to the running applications

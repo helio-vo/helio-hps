@@ -36,10 +36,10 @@ public class SimpleApplicationEngine implements ApplicationEngine
 				app,
 				fastExecution,
 				numParallelJobs);
-		System.out.println("SimpleApplicationEngine.executeApplication - exedesc is " + exeDesc.appDesc.toString());
-		System.out.println("SimpleApplicationEngine.executeApplication - params are " + exeDesc.appDesc.parameters);
-		logUtilities.printLongLogEntry(" xxx " + app.getParameters());
-
+		
+//		System.out.println(" **** SimpleApplicationEngine.executeApplication - exedesc is " + exeDesc.appDesc.toString());
+//		System.out.println(" **** SimpleApplicationEngine.executeApplication - params are " + exeDesc.appDesc.parameters);
+//		System.out.println(" **** SimpleApplicationEngine.executeApplication - params are " + app.getParameters());
 		/*
 		 * Find the best job execution engine to run this application
 		 */
@@ -53,7 +53,7 @@ public class SimpleApplicationEngine implements ApplicationEngine
 		 * Add the processing engine to the processing engines map
 		 */
 		processingResources.put(appExeId, jobExecutor);
-		logUtilities.printShortLogEntry(processingResources.toString());
+//		logUtilities.printShortLogEntry(processingResources.toString());
 		return appExeId;
 	}
 

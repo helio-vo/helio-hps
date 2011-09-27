@@ -22,7 +22,7 @@ public class FastEngine extends GenericProcessingEngine
 	@Override
 	protected boolean execute(ApplicationExecutionDescription exeDesc) 
 	{
-		logUtilities.printLongLogEntry(" xxx " + exeDesc.appDesc.getParameters());
+//		logUtilities.printLongLogEntry(" xxx " + exeDesc.appDesc.getParameters());
 
 //		logUtilities.printShortLogEntry("Running Scripts : " + runningScripts);
 //		logUtilities.printShortLogEntry("ApplicationExecutionDescription : " + exeDesc);
@@ -46,7 +46,7 @@ public class FastEngine extends GenericProcessingEngine
 		/*
 		 * Getting the status of the running script controller...
 		 */
-		System.out.println(exeId);
+//		System.out.println(exeId);
 //		logUtilities.printShortLogEntry("Running Scripts : " + runningScripts);		
 //		System.out.println("Script controller thread state is " + runningScripts.get(exeId).getState());
 		

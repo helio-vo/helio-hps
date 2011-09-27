@@ -33,9 +33,9 @@ public class DummyApplicationRepository implements ApplicationRepository
 				"pm_1",
 				"The first prototype of the Propagation Model",
 				params,
-				"/usr/local/helio/applications/pm_mock",
-				"pm_mock.sh",
-				"pm_mock.jdl"
+				"/usr/local/helio/applications/pm_1",
+				"pm_1.sh",
+				"pm_1.jdl"
 				));		
 //		/*
 //		 * This is just for prototyping
@@ -100,11 +100,22 @@ public class DummyApplicationRepository implements ApplicationRepository
 	}
 
 	@Override
-	public CompleteApplicationDescription getApplicationCompleteDescription	(		
-			String appId) 
+	public CompleteApplicationDescription getApplicationCompleteDescription	(AbstractApplicationDescription app) 
 	{
-		System.out.println(" **** " + applications.get(appId).toString());
-		
-		return applications.get(appId);
+		/*
+		 * TODO : Remove comments
+		 */
+		/*
+		 * Extract the description from the map and add the newly set parameters
+		 */
+		CompleteApplicationDescription	res	=	applications.get(app.getId());
+		res.setParameters(app.getParameters());	
+//		System.out.println(" **** " + applications.get(app.getId()).getFullDescription());		
+//		System.out.println(" **** Type returned is " + applications.get(app.getId()).getClass());
+//		System.out.println(" **** Argument returned is " + applications.get(app.getId()).getParameters());
+		/*
+		 * Now set the parameters
+		 */
+		return res;
 	}
 }
