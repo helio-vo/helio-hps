@@ -16,7 +16,7 @@
         This is the parent project of the components related to the Processing Service.
 	</description>
 	<modules>
-		<module>helio-hps-applications</module>
+		<!--  >module>helio-hps-applications</module-->
 		<module>helio-hps-server</module>
 		<module>helio-hps-client</module>
 	</modules>
