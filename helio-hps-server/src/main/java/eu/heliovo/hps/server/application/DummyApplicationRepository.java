@@ -20,7 +20,7 @@ public class DummyApplicationRepository implements ApplicationRepository
 	protected void initialize() 
 	{
 		/*
-		 * This is just for prototyping
+		 * This is the first prototype of the propagation model.
 		 */
 		Vector<ApplicationParameter>	params	=	new Vector<ApplicationParameter>();
 		params.add(new ApplicationParameter("CME's starting time", "String", "UNDEFINED", "2011-09-11T23:00"));
@@ -36,6 +36,23 @@ public class DummyApplicationRepository implements ApplicationRepository
 				"/usr/local/helio/applications/pm_1",
 				"pm_1.sh",
 				"pm_1.jdl"
+				));		
+
+		/*
+		 * This is the first prototype of the file archival utility.
+		 */
+		params	=	new Vector<ApplicationParameter>();
+		params.add(new ApplicationParameter("File 1", "String", "UNDEFINED", "http://cdaweb.gsfc.nasa.gov/sp_phys/data/ace/cris_h2/2003/ac_h2_cris_20030101_v05.cdf"));
+		params.add(new ApplicationParameter("File 2", "String", "UNDEFINED", "http://cdaweb.gsfc.nasa.gov/sp_phys/data/ace/cris_h2/2003/ac_h2_cris_20030101_v05.cdf"));
+		
+		applications.put("fa_1", new CompleteApplicationDescription(
+				"File Archiver (First Prototype)", 
+				"fa_1",
+				"The first prototype of the File Archiver",
+				params,
+				"/usr/local/helio/applications/fa_1",
+				"fa_1.sh",
+				"fa_1.jdl"
 				));		
 //		/*
 //		 * This is just for prototyping
