@@ -6,6 +6,7 @@ import java.util.Vector;
 
 import javax.xml.ws.BindingProvider;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import eu.heliovo.hps.server.AbstractApplicationDescription;
@@ -180,7 +181,7 @@ public class HPSServiceImplTest
 //		logUtilities.printShortLogEntry("... done");
 //	}
 
-	@Test
+	@Ignore @Test
 	public void testExecuteApplications() 
 	{
 		/*
