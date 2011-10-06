@@ -1,6 +1,6 @@
 package eu.heliovo.hps.server.utilities;
 
-import eu.heliovo.hps.server.ApplicationExecutionStatus;
+import eu.heliovo.hps.server.application.ApplicationExecutionStatus;
 
 public class DummyUtilities 
 {
