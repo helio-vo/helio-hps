@@ -5,7 +5,6 @@ import java.util.Collection;
 import eu.heliovo.hps.server.application.AbstractApplicationDescription;
 import eu.heliovo.hps.server.application.ApplicationEngine;
 import eu.heliovo.hps.server.application.ApplicationRepository;
-import eu.heliovo.hps.server.application.DummyApplicationEngine;
 import eu.heliovo.hps.server.application.DummyApplicationRepository;
 import eu.heliovo.hps.server.application.ProcessingEngineException;
 import eu.heliovo.hps.server.application.SimpleApplicationEngine;

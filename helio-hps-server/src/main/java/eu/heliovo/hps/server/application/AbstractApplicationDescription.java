@@ -1,13 +1,13 @@
 package eu.heliovo.hps.server.application;
 
-import java.util.Vector;
+import java.util.List;
 
 public class AbstractApplicationDescription 
 {
 	String							name			=	null;
 	String							id				=	null;
 	String							description		=	null;
-	Vector<ApplicationParameter>	parameters		=	null;
+	List<ApplicationParameter>	    parameters		=	null;
 	
 	public AbstractApplicationDescription() 
 	{
@@ -32,7 +32,7 @@ public class AbstractApplicationDescription
 	public AbstractApplicationDescription(String name, 
 			String	id,
 			String description,
-			Vector<ApplicationParameter> parameters) 
+			List<ApplicationParameter> parameters) 
 	{
 		super();
 		this.name 			= 	name;
@@ -44,7 +44,7 @@ public class AbstractApplicationDescription
 	/**
 	 * @return the parameters
 	 */
-	public Vector<ApplicationParameter> getParameters() 
+	public List<ApplicationParameter> getParameters() 
 	{
 		return parameters;
 	}
@@ -52,7 +52,7 @@ public class AbstractApplicationDescription
 	/**
 	 * @param parameters the parameters to set
 	 */
-	public void setParameters(Vector<ApplicationParameter> parameters) {
+	public void setParameters(List<ApplicationParameter> parameters) {
 		this.parameters = parameters;
 	}
 

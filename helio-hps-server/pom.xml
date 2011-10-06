@@ -10,6 +10,7 @@
 		<artifactId>helio-hps</artifactId>
 		<groupId>eu.heliovo</groupId>
 		<version>5.0-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
 	</parent>
 	
 	<groupId>eu.heliovo</groupId>
