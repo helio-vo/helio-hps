@@ -12,7 +12,7 @@
   <description>Client to the Processing Server</description>
 
 	<properties>
-		<wsdl>${basedir}\src\main\resources\wsdl\HPSService.wsdl</wsdl>
+		<wsdl>${basedir}/src/main/resources/wsdl/HPSService.wsdl</wsdl>
 		<junit-version>4.5</junit-version>
 		<cxf.version>2.2.6</cxf.version>
 		<spring-version>3.0.5.RELEASE</spring-version>
