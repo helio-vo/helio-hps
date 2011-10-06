@@ -2,7 +2,6 @@ package eu.heliovo.hps.server.application;
 
 import java.util.HashMap;
 
-import eu.heliovo.hps.server.ApplicationExecutionStatus;
 import eu.heliovo.hps.server.processing.fast.SimpleScriptController;
 import eu.heliovo.shared.common.utilities.LogUtilities;
 import eu.heliovo.shared.common.utilities.SystemUtilities;

@@ -2,8 +2,6 @@ package eu.heliovo.hps.server.application;
 
 import java.util.Date;
 
-import eu.heliovo.hps.server.ApplicationExecutionStatus;
-
 public class ApplicationExecutionDescription 
 {
 	CompleteApplicationDescription	appDesc				=	null;
