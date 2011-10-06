@@ -65,23 +65,6 @@
       <xs:element minOccurs="0" name="value" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="vector">
-    <xs:complexContent>
-      <xs:extension base="tns:abstractList">
-        <xs:sequence/>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:complexType abstract="true" name="abstractList">
-    <xs:complexContent>
-      <xs:extension base="tns:abstractCollection">
-        <xs:sequence/>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:complexType abstract="true" name="abstractCollection">
-    <xs:sequence/>
-  </xs:complexType>
   <xs:complexType name="executeApplicationResponse">
     <xs:sequence>
       <xs:element minOccurs="0" name="executionId" type="xs:string"/>
