@@ -9,6 +9,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import eu.heliovo.hps.server.application.AbstractApplicationDescription;
+import eu.heliovo.hps.server.application.ApplicationExecutionStatus;
 import eu.heliovo.hps.server.application.ApplicationParameter;
 import eu.heliovo.shared.common.utilities.LogUtilities;
 
