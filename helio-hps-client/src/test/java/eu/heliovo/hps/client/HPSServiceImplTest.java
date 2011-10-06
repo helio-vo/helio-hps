@@ -234,7 +234,9 @@ public class HPSServiceImplTest
 		app.setDescription("Description of application 1");
 		app.setId("app_1");
 		app.setName("Application_1");
-		app.setParameter(params);
+		app.getParameters().clear();
+		app.getParameters().addAll(params);
+//		app.setParameter(params);
 		
 //		AbstractApplicationDescription app = new AbstractApplicationDescription(
 //				"Application_1", "app_1", "Description of application 1",

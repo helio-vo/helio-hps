@@ -6,14 +6,12 @@ import java.io.InputStreamReader;
 import java.util.Vector;
 
 import javax.xml.ws.BindingProvider;
-import javax.xml.ws.WebFault;
 
 import eu.heliovo.hps.server.AbstractApplicationDescription;
-import eu.heliovo.hps.server.ApplicationExecutionStatus;
 import eu.heliovo.hps.server.HPSService;
-import eu.heliovo.hps.server.HPSServiceException;
 import eu.heliovo.hps.server.HPSServiceService;
 import eu.heliovo.shared.common.utilities.LogUtilities;
+import eu.heliovo.shared.hps.ApplicationExecutionStatus;
 
 public class PropagationModelDemo 
 {
