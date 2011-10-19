@@ -12,7 +12,10 @@
   <description>Client to the Processing Server</description>
 
 	<properties>
-		<wsdl>${basedir}/src/main/resources/wsdl/HPSService.wsdl</wsdl>
+		<!--  Local file
+		<wsdl>${basedir}\src\main\resources\wsdl\HPSService.wsdl</wsdl>
+		-->
+		<wsdl>http://cagnode58.cs.tcd.ie:8080/helio-hps-server/hpsService?wsdl</wsdl>
 		<junit-version>4.5</junit-version>
 		<cxf.version>2.2.6</cxf.version>
 		<spring-version>3.0.5.RELEASE</spring-version>
@@ -21,13 +24,14 @@
 
 	<build>
 		<!--  Added on Marco's suggestion on 2011.10.06 -->
+	    <!--  
 	    <resources>
          <resource>
              <directory>../src/main/ws/wsdl</directory>
              <targetPath>${basedir}/target/classes/wsdl</targetPath>
          </resource>
         </resources>
-	
+		-->
 	
 		<plugins>
 		
