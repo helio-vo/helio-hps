@@ -1,5 +1,6 @@
 package eu.heliovo.hps.server.application;
 
+import eu.heliovo.shared.hps.ApplicationExecutionStatus;
 
 public class DummyApplicationEngine implements ApplicationEngine 
 {

@@ -20,40 +20,78 @@ public class DummyApplicationRepository implements ApplicationRepository
 	protected void initialize() 
 	{
 		/*
-		 * This is the first prototype of the propagation model.
+		 * This is the Propagation Model for Coronal Mass Ejections
 		 */
 		Vector<ApplicationParameter>	params	=	new Vector<ApplicationParameter>();
 		params.add(new ApplicationParameter("CME's starting time", "String", "UNDEFINED", "2011-09-11T23:00"));
-		params.add(new ApplicationParameter("CME's starting point", "Float", "UNDEFINED", "25.00"));
-		params.add(new ApplicationParameter("CME's starting width", "Float", "UNDEFINED", "10.00"));
-		params.add(new ApplicationParameter("CME's starting speed", "Float", "UNDEFINED", "500.00"));
+		params.add(new ApplicationParameter("CME's starting point", "Float", "UNDEFINED", "0.00"));
+		params.add(new ApplicationParameter("CME's starting width", "Float", "UNDEFINED", "45.00"));
+		params.add(new ApplicationParameter("CME's starting speed", "Float", "UNDEFINED", "100.00"));
+		params.add(new ApplicationParameter("CME's error speed", "Float", "UNDEFINED", "0.00"));
 		
-		applications.put("pm_1", new CompleteApplicationDescription(
-				"Propagation Model (First Prototype)", 
-				"pm_1",
-				"The first prototype of the Propagation Model",
+		applications.put("pm_cme", new CompleteApplicationDescription(
+				"Propagation Model for Coronal Mass Ejections (CMEs)", 
+				"pm_cme",
+				"Propagation Model for Coronal Mass Ejections (CMEs)",
 				params,
-				"/usr/local/helio/applications/pm_1",
+				"/usr/local/helio/applications/pm_cme",
 				"pm_1.sh",
 				"pm_1.jdl"
 				));		
-
 		/*
-		 * This is the first prototype of the file archival utility.
+		 * This is the Propagation Model for Solar Wind
 		 */
 		params	=	new Vector<ApplicationParameter>();
-		params.add(new ApplicationParameter("File 1", "String", "UNDEFINED", "http://cdaweb.gsfc.nasa.gov/sp_phys/data/ace/cris_h2/2003/ac_h2_cris_20030101_v05.cdf"));
-		params.add(new ApplicationParameter("File 2", "String", "UNDEFINED", "http://cdaweb.gsfc.nasa.gov/sp_phys/data/ace/cris_h2/2003/ac_h2_cris_20030101_v05.cdf"));
+		params.add(new ApplicationParameter("SW's starting time", "String", "UNDEFINED", "2011-09-11T23:00"));
+		params.add(new ApplicationParameter("SW's starting point", "Float", "UNDEFINED", "0.00"));
+		params.add(new ApplicationParameter("SW's starting width", "Float", "UNDEFINED", "45.00"));
+		params.add(new ApplicationParameter("SW's starting speed", "Float", "UNDEFINED", "100.00"));
+//		params.add(new ApplicationParameter("SW's error speed", "Float", "UNDEFINED", "0.00"));
 		
-		applications.put("fa_1", new CompleteApplicationDescription(
-				"File Archiver (First Prototype)", 
-				"fa_1",
-				"The first prototype of the File Archiver",
+		applications.put("pm_sw", new CompleteApplicationDescription(
+				"Propagation Model for Solar Wind (SW)", 
+				"pm_sw",
+				"Propagation Model for Solar Wind (SW)",
 				params,
-				"/usr/local/helio/applications/fa_1",
-				"fa_1.sh",
-				"fa_1.jdl"
+				"/usr/local/helio/applications/pm_sw",
+				"pm_1.sh",
+				"pm_1.jdl"
 				));		
+		/*
+		 * This is the Propagation Model for Solar Energetic Particles
+		 */
+		params	=	new Vector<ApplicationParameter>();
+		params.add(new ApplicationParameter("SEP's starting time", "String", "UNDEFINED", "2011-09-11T23:00"));
+		params.add(new ApplicationParameter("SEP's starting point", "Float", "UNDEFINED", "0.00"));
+		params.add(new ApplicationParameter("SEP's starting width", "Float", "UNDEFINED", "45.00"));
+		params.add(new ApplicationParameter("SEP's starting speed", "Float", "UNDEFINED", "100.00"));
+		params.add(new ApplicationParameter("SEP's error speed", "Float", "UNDEFINED", "0.00"));
+		
+		applications.put("pm_sep", new CompleteApplicationDescription(
+				"Propagation Model for Solar Energetic Particles (SEP)", 
+				"pm_sw",
+				"Propagation Model for Solar Energetic Particles (SEP)",
+				params,
+				"/usr/local/helio/applications/pm_sep",
+				"pm_1.sh",
+				"pm_1.jdl"
+				));		
+//		/*
+//		 * This is the first prototype of the file archival utility.
+//		 */
+//		params	=	new Vector<ApplicationParameter>();
+//		params.add(new ApplicationParameter("File 1", "String", "UNDEFINED", "http://cdaweb.gsfc.nasa.gov/sp_phys/data/ace/cris_h2/2003/ac_h2_cris_20030101_v05.cdf"));
+//		params.add(new ApplicationParameter("File 2", "String", "UNDEFINED", "http://cdaweb.gsfc.nasa.gov/sp_phys/data/ace/cris_h2/2003/ac_h2_cris_20030101_v05.cdf"));
+//		
+//		applications.put("fa_1", new CompleteApplicationDescription(
+//				"File Archiver (First Prototype)", 
+//				"fa_1",
+//				"The first prototype of the File Archiver",
+//				params,
+//				"/usr/local/helio/applications/fa_1",
+//				"fa_1.sh",
+//				"fa_1.jdl"
+//				));		
 //		/*
 //		 * This is just for prototyping
 //		 */
