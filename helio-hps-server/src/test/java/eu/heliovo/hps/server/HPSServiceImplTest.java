@@ -1,15 +1,14 @@
 package eu.heliovo.hps.server;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
-import java.util.Collection;
 import java.util.Vector;
 
 import org.junit.Ignore;
 import org.junit.Test;
 
 import eu.heliovo.hps.server.application.AbstractApplicationDescription;
-import eu.heliovo.hps.server.application.ApplicationExecutionStatus;
 import eu.heliovo.hps.server.application.ApplicationParameter;
 import eu.heliovo.shared.common.utilities.LogUtilities;
 
