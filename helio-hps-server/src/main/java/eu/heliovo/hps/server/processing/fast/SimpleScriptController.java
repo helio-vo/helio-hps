@@ -57,8 +57,12 @@ public class SimpleScriptController extends Thread
 		/*
 		 * Define the temporary directory where the results will be stored
 		 */
-		String 	tmpDir	=	"/var/www/html/output_dir/" + appExeDesc.getAppExeId();
-		String 	tmpFile	=	tmpDir + "/" + appExeDesc.getAppExeId();
+		/*
+		 * I changed this to reflect the changes into the scripts that DVD 
+		 * implemented on 20.10.2011.
+		 */
+		String 	tmpDir	=	"/var/www/html/output_dir/" + appExeDesc.getAppExeId() + "/";
+//		String 	tmpFile	=	tmpDir + "/" + appExeDesc.getAppExeId();
 		/*
 		 * Create the temporary directory...
 		 */
@@ -66,7 +70,7 @@ public class SimpleScriptController extends Thread
 		/*
 		 * Add the tmp dir to the parameters for saving the output
 		 */
-		executable += " " + tmpFile;		
+		executable += " " + tmpDir;		
 //		System.out.println(" **** SimpleScriptController - executable line is " + executable);
 	}
 
