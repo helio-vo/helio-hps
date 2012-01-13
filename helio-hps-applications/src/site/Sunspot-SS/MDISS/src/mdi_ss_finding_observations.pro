@@ -1,8 +1,10 @@
-pro mdi_ss_finding_observations, inc, inm, fnc, fnm, no_show=no_show, $
+pro mdi_ss_finding_observations, inc, inm, fnc, fnm, $
                                  starttime=starttime, endtime=endtime, $ 
-			                     unprocessed=unprocessed, fname=fname, $
-				                 check=check, missvalscheck=missvalscheck, $
-			                     output_dir=output_dir,SILENT=SILENT
+			                     fname=fname, output_dir=output_dir, $
+								 write_png=write_png, $
+			                     MISSVALSCHECK=MISSVALSCHECK,NO_SHOW=NO_SHOW, $
+								 UNPROCESSED=UNPROCESSED, CHECK=CHECK, $
+								 SILENT=SILENT
 
 ;+
 ; NAME:
@@ -27,18 +29,24 @@ pro mdi_ss_finding_observations, inc, inm, fnc, fnm, no_show=no_show, $
 ;       inm           array of magnetogram index structures (mreadfits, fnc, inc, /nodata)
 ;
 ; OPTIONAL INPUTS:
-;       starttime - Scalar of string type containing the first date and time (ISO 8601 format) of data to process.
-;       endtime   - Scalar of string type containing the last date and time (ISO 8601 format) of data to process.
-;	    
+;       starttime  - Scalar of string type containing the first date and time (ISO 8601 format) of data to process.
+;       endtime    - Scalar of string type containing the last date and time (ISO 8601 format) of data to process.
+;       fname      - Provide prefix for ASCII output files ('mdi_ss_'+version+'_' used as default)
+;		output_dir - Full path of the directory where output files will be saved.
+;						Default is current one.	    
+;		write_png  - Write output png image files:
+;						write_png = 0 --> no output png file. (Default.)
+;						write_png = 1 --> write only pre-processed continuum images (without detection results).
+;						write_png = 2 --> Like 1, but also write the corresponding magnetograms.
+;						write_png = 3 --> write pre-processed continuum images with detection results.
+;						write_png = 4 --> Like 1, but also write the corresponding magnetograms with detection results.
 ;
 ; KEYWORD PARAMETERS:
-;       no_show       set it to suppress window output of the results
-;       unprocessed   set it to remove limb darkening (for level 1.8 data)
-;       fname         provide prefix for ASCII output files ('mdi_ss_'+version+'_' used as default)
-;       check         used for debugging, provides graphic output of the results and stops after each files
-;       missvalscheck set it do check magnetograms for MISSVALS (just set it)
-;		output_dir    Full path of the directory where output files will be saved.
-;						Default is current one.
+;      	/NO_SHOW      - set it to suppress window output of the results
+;       /UNPROCESSED  - set it to remove limb darkening (for level 1.8 data)
+;       /CHECK        - used for debugging, provides graphic output of the results and stops after each files
+;		/MISSVALCHECK - set it do check magnetograms for MISSVALS (just set it)
+;		/SILENT		  - Quiet mode.
 ;
 ; OUTPUTS:
 ;		None.				
@@ -74,6 +82,8 @@ pro mdi_ss_finding_observations, inc, inm, fnc, fnm, no_show=no_show, $
 ;								Added FRC output file.
 ;							    Added /SILENT keyword.
 ;                               Added starttime and endtime optional inputs.
+;   Version 1.02
+;		10-JAN-2012, X.bonnin:	Added write_png optional input.
 ;
 ;-
 
@@ -83,8 +93,17 @@ if (n_params() lt 2) then begin
   return
 end
 
+NO_SHOW = keyword_set(NO_SHOW)
+MISSVALSCHECK = keyword_set(MISSVALSCHECK)
 UNPROCESSED = keyword_set(UNPROCESSED)
+CHECK = keyword_set(CHECK)
 SILENT = keyword_set(SILENT)
+
+if (not keyword_set(write_png)) then wpng = 0 else begin
+	wpng = fix(write_png[0])
+	loadct, 0, /SILENT
+	tvlct, r, g, b, /get
+endelse
 
 if (strtrim(fnc[0],2) eq '') then begin
 	message,/CONT,'fnc input parameter is empty!'
@@ -223,8 +242,29 @@ for i=0l, nfnc-1 do begin
     print,'Writing observations output file: OK'
 
  ;*** read the intensity image into object
- wl=obj_new('wlfitsfdobs', filename=fnc(i), header=hd, unprocessed=unprocessed)
+ wl=obj_new('wlfitsfdobs', filename=fnc(i), header=hd, UNPROCESSED=UNPROCESSED)
     
+ ;*** read-in the magnetogram    
+ mg=obj_new('mgfitsfdobs', loc=fnm(ind))
+
+
+ if (wpng gt 0) then begin
+	print,'Writing continuum png image file...'
+	imc = bytscl(wl->getimage(),top=255,/NAN)
+	png_file = file_basename(obs_str_i(0).filename,'.fits')+'.png'
+	png_path = output_dir + path_sep() + png_file 
+	write_png,png_path,imc,r,g,b
+	print,'Writing continuum png image file:OK'
+ endif
+ if (wpng gt 1) then begin
+	print,'Writing magnetogram png image file...'
+	imm = bytscl(mg->getimage(),top=255,/NAN)
+	png_file = file_basename(obs_str_i(1).filename,'.fits')+'.png'
+	png_path = output_dir + path_sep() + png_file 
+	write_png,png_path,imm,r,g,b
+	print,'Writing magnetogram png image file:OK'
+ endif
+
  ;*** check the number of missing value pixels in the image, reject if large   
   if fxpar(hd, 'missvals') gt MISSVAL_THRESHOLD then begin
 	print, '**** MISSING VALUES overload...'
@@ -239,11 +279,9 @@ for i=0l, nfnc-1 do begin
 	continue
   endif
 
-; *** read-in the magnetogram    
-    mg=obj_new('mgfitsfdobs', loc=fnm(ind))
 
 ; *** run sunspot detection and generated sunspot object
-    sp=obj_new('sunspotmgobs', wl, mg, /one, no_show=no_show, /setmg, missvalscheck=missvalscheck)
+    sp=obj_new('sunspotmgobs', wl, mg, /ONE, NO_SHOW=NO_SHOW, /SETMG, MISSVALSCHECK=MISSVALSCHECK)
 	
 ; *** write observations output to file
     print,'Writing pp output file...'
@@ -276,7 +314,7 @@ for i=0l, nfnc-1 do begin
 
 
 ; *** write feature output    
-    if nss ne 0 then begin
+    if (nss gt 0) then begin
       print,'Writing feature output file...'
       feat_str_i = replicate(feat_str,nss)
       feat_file=fname+'_'+date_obs_i+'_feat.csv'
@@ -286,8 +324,38 @@ for i=0l, nfnc-1 do begin
       feat_str_i.feat_filename = feat_path  
       hfc_write_csv,feat_str_i,feat_path,error=error
       print,'Writing feature output file:OK'
+
+
+	  if (wpng gt 2) then begin
+	  	print,'Writing continuum png image file with detection results...'		
+		for k=0l,nss-1l do begin
+			sk=sp->getspot(k)
+			locs = sk->getlocs()
+			ulocs = sk->getumbra()
+			imc[locs] = max(imc,/NAN)
+			if (ulocs[0] ne -1) then imc[ulocs] = min(imc,/NAN)
+		endfor	
+		png_file = file_basename(obs_str_i(0).filename,'.fits')+'_mdiss_results.png'
+		png_path = output_dir + path_sep() + png_file 
+		write_png,png_path,imc,r,g,b
+		print,'Writing continuum png image file with detection results:OK'
+	  endif 
+	  if (wpng gt 3) then begin
+		print,'Writing magnetogram png image file with detection results...'		
+		for k=0l,nss-1l do begin
+			sk=sp->getspot(k)
+			locs = sk->getlocs()
+			ulocs = sk->getumbra()
+			imm[locs] = max(imm,/NAN)
+			if (ulocs[0] ne -1) then imm[ulocs] = min(imm,/NAN)
+		endfor	
+		png_file = file_basename(obs_str_i(0).filename,'.fits')+'_mdiss_results.png'
+		png_path = output_dir + path_sep() + png_file 
+		write_png,png_path,imm,r,g,b
+		print,'Writing magnetogram png image file with detection results:OK'
+	  endif 
     endif else print,'No sunspot detected!'
-    if keyword_set(check) then stop
+    if (CHECK) then stop
     
  ; *** cleanup    
   obj_destroy, sp
