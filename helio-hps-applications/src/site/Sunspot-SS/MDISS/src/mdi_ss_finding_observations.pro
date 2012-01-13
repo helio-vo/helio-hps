@@ -142,7 +142,7 @@ run_date = (strsplit(anytim(!stime, /ccsds),'.',/EXTRACT))[0]
 
 ;Define output filenames
 ;!!!! MUST BE CONSISTENT WITH THE VERSION NUMBER GIVEN IN THE MODIFICATION HISTORY!!!!
-version = '1.01'
+version = '1.02'
 str_version = strjoin(strsplit(version,'.',/EXTRACT))
 if not keyword_set(fname) then fname='mdiss_'+str_version
 
