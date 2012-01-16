@@ -25,10 +25,14 @@
 ;     	scf 	  - Scaling factor (either 1 or 4):
 ;             			1 -> normal resolution is used.
 ;               		4 -> the images are rescaled 4 times down (SOHO resolution).                     
-;      write_fits - Write auxillary files:
+;      write_fits - Write auxillary fits files:
 ;                       1 -> Intensity with limb darkening removed
 ;                       2 -> as 1 plus corresponding magnetogram
 ;                       3 -> as 2 plus detection results
+;	   write_png  - Write auxillary png files:
+;                       1 -> Intensity with limb darkening removed
+;                       2 -> as 1 plus corresponding magnetogram
+;                       3 -> as 2 plus detection results on intensity image.	
 ;	   status_ic  - Structure containing the information about vso query results 
 ;				    for intensity continuum fits file.
 ;	   status_m	  - Structure containing the information about vso query results 
@@ -40,7 +44,6 @@
 ; KEYWORD PARAMETERS:
 ;       /WRITE_XML  - Write detection results into csv format files.
 ;		/WRITE_CSV	- Write detection results into csv format files.  	
-;		/WRITE_PNG	- Create png image file of the continuum intensity image with sunspots contours.
 ;
 ; OUTPUTS:
 ;		None.	
@@ -80,7 +83,6 @@
 ;		sdo_ss_xml
 ;		sdo_ss_hfc_struct
 ;		mwritefits
-;		pngscreen
 ;       hfc_write_csv
 ;
 ; EXAMPLE:
@@ -112,6 +114,7 @@
 ;
 ;	Version 1.03
 ;		10-JAN-2012, X.Bonnin:	Correction of minor bugs.
+;								Updated write_png optional input.
 ;  
 ;-
 
@@ -123,7 +126,7 @@ pro sdo_ss_processing, fnc, fnm, $ ;inc=inc, inm=inm, dac=dac, dam=dam,$
                        oby_struct=oby_struct, frc_struct=frc_struct, $
                        obs_struct=obs_struct, pp_info_struct=pp_info_struct, $
                        pp_out_struct=pp_out_struct, feat_struct=feat_struct, $
-                       WRITE_CSV=WRITE_CSV,WRITE_PNG=WRITE_PNG,WRITE_XML=WRITE_XML
+                       write_png=write_png,WRITE_CSV=WRITE_CSV,WRITE_XML=WRITE_XML
 
 
 ;[1];Initializing program
@@ -137,11 +140,19 @@ if (n_params() lt 2) then begin
 	print,'                   outrout=outroot, write_fits=write_fits,$'
     print,'                   oby_struct=oby_struct, frc_struct=frc_struct, $'
     print,'                   obs_struct=obs_struct, pp_info_struct=pp_info_struct, $'
-	print,'                   /WRITE_CSV,/WRITE_PNG,/WRITE_XML'
+	print,'                   write_png=write_png,/WRITE_CSV,/WRITE_XML'
 	return
 endif
 syst0 = systime(/SEC)
 !QUIET = 1
+
+CSV = keyword_set(WRITE_CSV)
+XML = keyword_set(XML)
+if (not keyword_set(write_png)) then wpng = 0 else begin
+	wpng = fix(write_png[0])
+	loadct,0,/SILENT
+	tvlct,r,g,b,/GET
+endelse
 
 nfnc = n_elements(fnc)
 nfnm = n_elements(fnm)
@@ -163,7 +174,7 @@ endif
 ;!!!! Warning: the version must be updated if modifications are done
 ;in the code, and must be consistent with the modification history in the
 ;header !!!!
-version = '1.02'
+version = '1.03'
 
 outfnroot = 'sdoss_'+strjoin(strsplit(version,'.',/EXTRACT))
 
@@ -177,10 +188,6 @@ if not keyword_set(outroot) then begin
 	if not (file_test(outroot,/DIR)) then spawn,'mkdir '+outroot 
 endif
 outroot = outroot + path_sep()
-
-CSV = keyword_set(WRITE_CSV)
-PNG = keyword_set(WRITE_PNG)
-XML = keyword_set(XML)
 
 deg2mm = 6.96e8/!radeg
 
@@ -302,6 +309,19 @@ for ind=0, n_elements(fnc)-1 do begin
         continue
 	endif  
 	flatimage(llocs)=dac(llocs)/qsim(llocs)    
+
+	if (wpng gt 0) then begin
+		png_file = file_basename(obs_str_i(0).filename,'.fits')+'.png'
+		png_path = outroot + png_file
+		imc = bytscl(flatimage,top=255,/NAN)
+		write_png,png_path,imc,r,g,b		
+	endif
+	if (wpng gt 1) then begin
+		png_file = file_basename(obs_str_i(1).filename,'.fits')+'.png'
+		png_path = outroot + png_file
+		imm = bytscl(dam,top=255,/NAN)
+		write_png,png_path,imm,r,g,b		
+	endif	
 
       print, 'limb darkening removed ', systime(/sec)-tt
 	
@@ -430,7 +450,8 @@ for ind=0, n_elements(fnc)-1 do begin
               feat_str_i(count).feat_x_arcsec=(gcx-xc)*inc.cdelt1*scf ;gc_arcx
               feat_str_i(count).feat_y_arcsec=(gcy-yc)*inc.cdelt2*scf ;gc_arcy
               
-              ll=arcmin2hel(feat_str_i(count).feat_x_arcsec/60, feat_str_i(count).feat_y_arcsec/60, $
+              ll=arcmin2hel(feat_str_i(count).feat_x_arcsec/60, $
+							feat_str_i(count).feat_y_arcsec/60, $
                             date=inc.date_obs, /soho)
               
               feat_str_i(count).feat_hg_long_deg = ll(1) ;gc_helon
@@ -586,6 +607,7 @@ for ind=0, n_elements(fnc)-1 do begin
  
  	fnc_corr = "NULL"
  	fnm_corr = "NULL"
+	snapshot_fn = "NULL"
     if keyword_set(write_fits) then begin	
     	fnc_corr = outroot+ strmid(fnc(ind), strpos(fnc(ind), '/', /reverse_se)+1)+'_corrected_flat.fits'
 		mwritefits, outfile=fnc_corr, inc1, flatimage
@@ -597,37 +619,13 @@ for ind=0, n_elements(fnc)-1 do begin
 			+'_detection_results.fits', inc1, spot_image
 	endif
      
-    if (PNG) then begin 
-    	xarc = (indgen(inc1.naxis1)-inc1.crpix1)*inc1.cdelt1
-    	yarc = (indgen(inc1.naxis2)-inc1.crpix2)*inc1.cdelt2
-    	xmin = min(xarc,max=xmax) & ymin = min(yarc,max=ymax)
-    	xoffset = [-75,75] & yoffset = [-75,75]
-    	
-    	window,xsize=1024,ysize=1024
-    	display2d,flatimage,xarc,yarc,$
-    			  xtitle='X (arcsec)',ytitle='Y (arcsec)',$
-    			  color_table=0,$
-    			  xrange=[xmin,xmax]+xoffset,yrange=[ymin,ymax]+yoffset,$
-    			  /SILENT
-    	loadct,8,/SILENT
-    	contour,spot_image,xarc,yarc,/OVERPLOT,level=[1,2],c_th=[0.8, 0.2],c_col=[255,160]
-    	
-    	;Extra information
-    	dy = 45
-    	
-    	;Write filename
-    	xyouts,xmax,ymin,file_basename(fnc),/DATA,alignment=1.0
-    	
-    	;Write image info
-    	xyouts,xmin,ymax,'Heliophysics Feature Catalogue / Paris Observatory',/DATA
-    	xyouts,xmin,ymax-dy,'SDO/HMI Intensity Continuum '+frc_str.wavemin+' '+frc_str(0).WaveUnit,/DATA
-    	xyouts,xmin,ymax-2*dy,inc.date_obs,/DATA
-    	xyouts,xmin,ymax-3*dy,'rotation '+strtrim(inc.car_rot,2),/DATA
-    
-    	snapshot_fn = outroot+ strmid(fnc(ind), strpos(fnc(ind), '/', /reverse_se)+1) $
-				  +'_detection_results.png'
-    	pngscreen,snapshot_fn
-    endif else snapshot_fn = 'NULL'
+    if (wpng gt 2) and (nfeat gt 0) then begin 
+    	png_file = file_basename(obs_str_i(0).filename,'.fits') + $
+					'_sdoss_results.png'
+		png_path = outroot + png_file
+		imc_ss = bytscl(spot_image,top=255)
+		write_png,png_path,imc_ss,r,g,b
+    endif
     
     ;Update corresponding pp_output structure
     pp_out_str_i.pr_locfname = [file_basename(fnc_corr),file_basename(fnm_corr)]

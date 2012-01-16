@@ -45,9 +45,12 @@
 ;		fnm			- Vector of string type providing the list of 
 ;					  input SDO/HMI M fits file(s) to process.
 ;					  if both fnc and fnm are provided
+;	    write_png   - Write auxillary png files:
+;                       1 -> Intensity with limb darkening removed
+;                       2 -> as 1 plus corresponding magnetogram
+;                       3 -> as 2 plus detection results 
 ;
 ; KEYWORD PARAMETERS: 
-;		/WRITE_PNG      - Create a png file of the HMI Continuum images with the results of detections. 
 ;		/CLEAN_DATA	    - Remove SDO data file from local disk after processing.
 ;						  (USE WITH CAUTION!)
 ;		/WRITE_CSV	    - Write detection results into csv format files 
@@ -98,9 +101,10 @@ PRO sdo_ss_launcher,starttime,endtime,$
 				    data_dir=data_dir,$
 					fnc=fnc, fnm=fnm, $
 				    output_dir=output_dir,$
+					write_png=write_png, $ 
 				    WRITE_CSV=WRITE_CSV,CLEAN_DATA=CLEAN_DATA,$
 				    DOWNLOAD_DATA=DOWNLOAD_DATA,$
-				    WRITE_PNG=WRITE_PNG,SILENT=SILENT
+				    SILENT=SILENT
 
 
 ;[1]:Initializing 
@@ -115,12 +119,11 @@ if (n_params() lt 2) then begin
 	print,'                    data_dir=data_dir,$'
 	print,'                    fnc=fnc, fnm=fnm, $'
 	print,'	                   output_dir=output_dir,$'
-	print,'                    /WRITE_PNG,/WRITE_CSV,/CLEAN_DATA,$'
+	print,'                    write_png=write_png,/WRITE_CSV,/CLEAN_DATA,$'
 	print,'                    /DOWNLOAD_DATA,/SILENT'
 	return
 endif
 
-WRITE_PNG = keyword_set(WRITE_PNG)
 WRITE_CSV = keyword_set(WRITE_CSV)
 CLEAN = keyword_set(CLEAN_DATA)
 SILENT = keyword_set(SILENT)
@@ -264,7 +267,7 @@ for i=0l,nfnc-1l do begin
 	   				  write_fits=write_fits,scf=scf,$
 					  outroot=output_dir+path_sep(),$
 					  status_ic=inc_i,status_m=inm_i,$
-					  WRITE_CSV=WRITE_CSV,WRITE_PNG=WRITE_PNG
+					  write_png=write_png,WRITE_CSV=WRITE_CSV
 	if (~SILENT) then print,'Running sunspot detection code:OK'
 	
 	if (CLEAN) then begin

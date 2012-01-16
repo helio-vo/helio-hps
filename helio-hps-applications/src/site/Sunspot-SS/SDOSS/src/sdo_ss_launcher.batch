@@ -15,11 +15,11 @@ Output_Dir = Sdoss_Dir + '/products' 							   ;-> Products (Png, Csv, Etc.) Dir
 ;Add To !Path Variable Or Compile Extra Idl Routines Required To Run The Code
 .Compile Vso_Get
 Pathsep = Path_Sep(/Search_Path) 
-!Path = Expand_Path('+'+Sdoss_Dir+'/src/aux1') + Pathsep + !Path
+!Path = Expand_Path('+'+Sdoss_Dir+'/src/aux') + Pathsep + !Path
 
 ;Define Time Range To Process
-Starttime = '2010-05-01T00:00:00'
-Endtime = '2010-06-01T00:00:00'
+Starttime = '2010-05-19T12:00:00'
+Endtime = '2011-01-01T00:00:00'
 
 ;Cadence: 1 Image every two hours
 sample = 7200.
@@ -28,10 +28,12 @@ sample = 7200.
 ;Write_Fits=0 -> No Output Fits  
 ;Scf=4 -> Soho/Mdi Resolution (I.E. 1024 X 1024), scf=1 -> max res
 ;/Csv -> Create Csv Files Instead Of Xml Ones.
-;/Png -> Create Png Sdo/Hmi Ic Image Of The Sun + Detection Results (= Snapshot)
+;write_png -> Create Png Sdo/Hmi Ic Image Of The Sun + Detection Results (= Snapshot)
 ;/Clean -> Delete Input Sdo/Hmi Fits File After Processing (To Free Space On Disk)
+
+write_png = 3
 
 sdo_ss_launcher,Starttime,Endtime,Sample=Sample,$
 				Data_Dir=Data_Dir,Output_Dir=Output_Dir,$
-				Write_Fits=3,Scf=1,$
-				/WRITE_CSV,/DOWNLOAD,/CLEAN
+				write_png=write_png,Scf=1,$
+				/WRITE_CSV,/DOWNLOAD;,/CLEAN
