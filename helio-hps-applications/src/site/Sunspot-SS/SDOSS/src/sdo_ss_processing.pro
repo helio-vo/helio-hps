@@ -319,7 +319,7 @@ for ind=0, n_elements(fnc)-1 do begin
 	if (wpng gt 1) then begin
 		png_file = file_basename(obs_str_i(1).filename,'.fits')+'.png'
 		png_path = outroot + png_file
-		imm = bytscl(dam,top=255,/NAN)
+		imm = bytscl(dam,top=255,min=-1.e2,max=1.e2,/NAN)
 		write_png,png_path,imm,r,g,b		
 	endif	
 
