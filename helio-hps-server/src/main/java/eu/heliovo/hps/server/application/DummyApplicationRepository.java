@@ -44,9 +44,18 @@ public class DummyApplicationRepository implements ApplicationRepository
 		params	=	new Vector<ApplicationParameter>();
 		params.add(new ApplicationParameter("SW's starting time", "String", "UNDEFINED", "2011-09-11T23:00"));
 		params.add(new ApplicationParameter("SW's starting point", "Float", "UNDEFINED", "0.00"));
-		params.add(new ApplicationParameter("SW's starting width", "Float", "UNDEFINED", "45.00"));
+//		params.add(new ApplicationParameter("SW's starting width", "Float", "UNDEFINED", "45.00"));
 		params.add(new ApplicationParameter("SW's starting speed", "Float", "UNDEFINED", "100.00"));
 //		params.add(new ApplicationParameter("SW's error speed", "Float", "UNDEFINED", "0.00"));
+
+		/*
+		 * This were the wrong parameters
+		 */
+//		params.add(new ApplicationParameter("SW's starting time", "String", "UNDEFINED", "2011-09-11T23:00"));
+//		params.add(new ApplicationParameter("SW's starting point", "Float", "UNDEFINED", "0.00"));
+//		params.add(new ApplicationParameter("SW's starting width", "Float", "UNDEFINED", "45.00"));
+//		params.add(new ApplicationParameter("SW's starting speed", "Float", "UNDEFINED", "100.00"));
+////		params.add(new ApplicationParameter("SW's error speed", "Float", "UNDEFINED", "0.00"));
 		
 		applications.put("pm_sw", new CompleteApplicationDescription(
 				"Propagation Model for Solar Wind (SW)", 
