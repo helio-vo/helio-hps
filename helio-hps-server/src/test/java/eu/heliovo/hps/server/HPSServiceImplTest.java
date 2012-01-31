@@ -38,7 +38,8 @@ public class HPSServiceImplTest {
 
 	@Ignore
 	@Test
-	public void testExecuteApplication() {
+	public void testExecuteApplication() 
+	{
 		Vector<ApplicationParameter> params = new Vector<ApplicationParameter>();
 		params.add(new ApplicationParameter("param_a", "String", "UNDEFINED",
 				"Gab"));

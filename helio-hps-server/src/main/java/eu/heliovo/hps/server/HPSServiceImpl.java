@@ -78,6 +78,7 @@ public class HPSServiceImpl implements HPSService
 	public String getOutputOfExecution(String exeId) throws HPSServiceException 
 	{
 		logUtilities.printShortLogEntry("HPSServiceImpl.getOutputOfExecution(...)");
-		return appEngine.getOutputOfExecution(exeId);
+		return "http://cagnode58.cs.tcd.ie/output_dir/"+exeId;
+		// return appEngine.getOutputOfExecution(exeId);
 	}	
 }

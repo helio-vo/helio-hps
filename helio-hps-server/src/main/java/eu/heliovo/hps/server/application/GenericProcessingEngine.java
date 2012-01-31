@@ -20,8 +20,8 @@ public class GenericProcessingEngine implements ProcessingEngine
 	@Override
 	public String executeApplication(ApplicationExecutionDescription exeDesc) throws ProcessingEngineException 
 	{
-		System.out.println(" **** SimpleApplicationEngine.executeApplication - exedesc is " + exeDesc.appDesc.toString());
-		System.out.println(" **** SimpleApplicationEngine.executeApplication - params are " + exeDesc.appDesc.parameters);
+		logUtilities.printShortLogEntry("Submitting " + exeDesc.appDesc.toString());
+		logUtilities.printShortLogEntry("With params " + exeDesc.appDesc.parameters + " ...");
 		
 		String appExeId	=	exeUtilities.getExecutionId();			
 		/*
@@ -35,7 +35,7 @@ public class GenericProcessingEngine implements ProcessingEngine
 			 * If the submission was successfull, add it to the running applications
 			 */
 			runningApplications.put(appExeId, exeDesc);
-			logUtilities.printShortLogEntry(runningApplications.toString());
+//			logUtilities.printShortLogEntry(runningApplications.toString());
 			return	appExeId;
 		}
 		else

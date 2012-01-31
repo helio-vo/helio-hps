@@ -29,10 +29,10 @@ public class DummyApplicationRepository implements ApplicationRepository
 		params.add(new ApplicationParameter("CME's starting speed", "Float", "UNDEFINED", "100.00"));
 		params.add(new ApplicationParameter("CME's error speed", "Float", "UNDEFINED", "0.00"));
 		
-		applications.put("pm_cme", new CompleteApplicationDescription(
-				"Propagation Model for Coronal Mass Ejections (CMEs)", 
-				"pm_cme",
-				"Propagation Model for Coronal Mass Ejections (CMEs)",
+		applications.put("pm_cme_fw", new CompleteApplicationDescription(
+				"Forward Propagation Model for Coronal Mass Ejections (CMEs)", 
+				"pm_cme_fw",
+				"Forward Propagation Model for Coronal Mass Ejections (CMEs)",
 				params,
 				"/usr/local/helio/applications/pm_cme",
 				"pm_1.sh",
@@ -42,7 +42,6 @@ public class DummyApplicationRepository implements ApplicationRepository
 		/*
 		 * This is the Backward Propagation Model for Coronal Mass Ejections
 		 */
-
 		params	=	new Vector<ApplicationParameter>();
 		params.add(new ApplicationParameter("CME's starting time", "String", "UNDEFINED", "2011-09-11T23:00"));
 		params.add(new ApplicationParameter("CME's hit object", "Float", "UNDEFINED", "0.00"));
@@ -61,53 +60,87 @@ public class DummyApplicationRepository implements ApplicationRepository
 				));		
 
 		/*
-		 * This is the Propagation Model for Solar Wind
+		 * This is the Forward Propagation Model for Solar Wind
 		 */
 		params	=	new Vector<ApplicationParameter>();
 		params.add(new ApplicationParameter("SW's starting time", "String", "UNDEFINED", "2011-09-11T23:00"));
 		params.add(new ApplicationParameter("SW's starting point", "Float", "UNDEFINED", "0.00"));
-//		params.add(new ApplicationParameter("SW's starting width", "Float", "UNDEFINED", "45.00"));
 		params.add(new ApplicationParameter("SW's starting speed", "Float", "UNDEFINED", "100.00"));
-//		params.add(new ApplicationParameter("SW's error speed", "Float", "UNDEFINED", "0.00"));
+		params.add(new ApplicationParameter("SW's error speed", "Float", "UNDEFINED", "0.00"));
 
-		/*
-		 * This were the wrong parameters
-		 */
-//		params.add(new ApplicationParameter("SW's starting time", "String", "UNDEFINED", "2011-09-11T23:00"));
-//		params.add(new ApplicationParameter("SW's starting point", "Float", "UNDEFINED", "0.00"));
-//		params.add(new ApplicationParameter("SW's starting width", "Float", "UNDEFINED", "45.00"));
-//		params.add(new ApplicationParameter("SW's starting speed", "Float", "UNDEFINED", "100.00"));
-////		params.add(new ApplicationParameter("SW's error speed", "Float", "UNDEFINED", "0.00"));
 		
-		applications.put("pm_sw", new CompleteApplicationDescription(
-				"Propagation Model for Solar Wind (SW)", 
-				"pm_sw",
-				"Propagation Model for Solar Wind (SW)",
+		applications.put("pm_cir_fw", new CompleteApplicationDescription(
+				"Forward Propagation Model for Co-rotating Interactive Regions (CIR)", 
+				"pm_cir_fw",
+				"Forward Propagation Model for Co-rotating Interactive Regions (CIR)",
 				params,
 				"/usr/local/helio/applications/pm_sw",
 				"pm_1.sh",
 				"pm_1.jdl"
 				));		
+		
+		
 		/*
-		 * This is the Propagation Model for Solar Energetic Particles
+		 * This is the Backward Propagation Model for Solar Wind
+		 */
+		params	=	new Vector<ApplicationParameter>();
+		params.add(new ApplicationParameter("SW's starting time", "String", "UNDEFINED", "2011-09-11T23:00"));
+		params.add(new ApplicationParameter("SW's hit object", "String", "UNDEFINED", "0.00"));
+		params.add(new ApplicationParameter("SW's starting speed", "Float", "UNDEFINED", "100.00"));
+		params.add(new ApplicationParameter("SW's error speed", "Float", "UNDEFINED", "0.00"));
+
+		
+		applications.put("pm_cir_back", new CompleteApplicationDescription(
+				"Backward Propagation Model for Co-rotating Interactive Regions (CIR)", 
+				"pm_cir_back",
+				"Backward Propagation Model for Co-rotating Interactive Regions (CIR)",
+				params,
+				"/usr/local/helio/applications/pm_sw_back",
+				"pm_1.sh",
+				"pm_1.jdl"
+				));		
+		/*
+		 * This is the Forward Propagation Model for Solar Energetic Particles
 		 */
 		params	=	new Vector<ApplicationParameter>();
 		params.add(new ApplicationParameter("SEP's starting time", "String", "UNDEFINED", "2011-09-11T23:00"));
 		params.add(new ApplicationParameter("SEP's starting point", "Float", "UNDEFINED", "0.00"));
-//		params.add(new ApplicationParameter("SEP's starting width", "Float", "UNDEFINED", "45.00"));
 		params.add(new ApplicationParameter("SEP's starting speed", "Float", "UNDEFINED", "100.00"));
 		params.add(new ApplicationParameter("SEP's error speed", "Float", "UNDEFINED", "0.00"));
 		params.add(new ApplicationParameter("Beta (Fraction of speed of light)", "Float", "UNDEFINED", "0.90"));
 		
-		applications.put("pm_sep", new CompleteApplicationDescription(
-				"Propagation Model for Solar Energetic Particles (SEP)", 
-				"pm_sep",
-				"Propagation Model for Solar Energetic Particles (SEP)",
+		applications.put("pm_sep_fw", new CompleteApplicationDescription(
+				"Forward Propagation Model for Solar Energetic Particles (SEP)", 
+				"pm_sep_fw",
+				"Forward Propagation Model for Solar Energetic Particles (SEP)",
 				params,
 				"/usr/local/helio/applications/pm_sep",
 				"pm_1.sh",
 				"pm_1.jdl"
 				));		
+
+		/*
+		 * This is the Backward Propagation Model for Solar Energetic Particles
+		 */
+		params	=	new Vector<ApplicationParameter>();
+		params.add(new ApplicationParameter("SEP's starting time", "String", "UNDEFINED", "2011-09-11T23:00"));
+		params.add(new ApplicationParameter("SEP's hit object", "String", "UNDEFINED", "0.00"));
+		params.add(new ApplicationParameter("SEP's starting speed", "Float", "UNDEFINED", "100.00"));
+		params.add(new ApplicationParameter("SEP's error speed", "Float", "UNDEFINED", "0.00"));
+		params.add(new ApplicationParameter("Beta (Fraction of speed of light)", "Float", "UNDEFINED", "0.90"));
+		
+		applications.put("pm_sep_back", new CompleteApplicationDescription(
+				"Backward Propagation Model for Solar Energetic Particles (SEP)", 
+				"pm_sep_back",
+				"Backward Propagation Model for Solar Energetic Particles (SEP)",
+				params,
+				"/usr/local/helio/applications/pm_sep_back",
+				"pm_1.sh",
+				"pm_1.jdl"
+				));		
+
+		
+		
 //		/*
 //		 * This is the first prototype of the file archival utility.
 //		 */

@@ -48,7 +48,7 @@ public class FastEngine extends GenericProcessingEngine
 		 */
 //		System.out.println(exeId);
 //		logUtilities.printShortLogEntry("Running Scripts : " + runningScripts);		
-//		System.out.println("Script controller thread state is " + runningScripts.get(exeId).getState());
+		logUtilities.printShortLogEntry(exeId + ": " + runningScripts.get(exeId).getState());
 		
 		if(runningScripts.get(exeId).getState().equals(Thread.State.TERMINATED))
 			newStatus	=	ApplicationExecutionStatus.Completed;

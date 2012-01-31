@@ -21,7 +21,7 @@ public class SimpleApplicationEngine implements ApplicationEngine
 	/*
 	 * The map with the running applications
 	 */
-	HashMap<String, ProcessingEngine>					processingResources	=	new HashMap<String, ProcessingEngine>();
+	HashMap<String, ProcessingEngine>		processingResources	=	new HashMap<String, ProcessingEngine>();
 	
 	@Override
 	public String executeApplication(
