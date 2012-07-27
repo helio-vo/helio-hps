@@ -13,9 +13,7 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	
-	<groupId>eu.heliovo</groupId>
 	<artifactId>helio-hps-server</artifactId>
-	<version>5.0-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>helio-hps-server</name>
 	<description>HELIO Processing Service</description>
@@ -24,7 +22,7 @@
 	<properties>
 		<junit-version>4.5</junit-version>
 		<cxf.version>2.2.6</cxf.version>
-		<spring-version>3.0.5.RELEASE</spring-version>
+		<spring-version>3.1.0.RELEASE</spring-version>
 		<commons-logging-version>1.1.1</commons-logging-version>
 	</properties>
 
@@ -121,106 +119,134 @@
 		</pluginManagement>
 	</build>
 
-		<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>commons-logging</groupId>
-				<artifactId>commons-logging</artifactId>
-				<version>1.1.1</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-context</artifactId>
-				<version>${spring-version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-beans</artifactId>
-				<version>${spring-version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-core</artifactId>
-				<version>${spring-version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-expression</artifactId>
-				<version>${spring-version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-aop</artifactId>
-				<version>${spring-version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-web</artifactId>
-				<version>${spring-version}</version>
-			</dependency>
-			<dependency>
-				<groupId>junit</groupId>
-				<artifactId>junit</artifactId>
-				<version>4.8.2</version>
-			</dependency>
-			<dependency>
-				<groupId>xml-apis</groupId>
-				<artifactId>xml-apis</artifactId>
-				<version>1.3.02</version>
-			</dependency>
-			<dependency>
-				<groupId>com.sun.xml.bind</groupId>
-				<artifactId>jaxb-impl</artifactId>
-				<version>2.0.5</version>
-			</dependency>
-			<dependency>
-				<groupId>jaxen</groupId>
-				<artifactId>jaxen</artifactId>
-				<version>1.1</version>
-			</dependency>
-			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-log4j12</artifactId>
-				<version>1.6.1</version>
-			</dependency>
-			<dependency>
-				<groupId>log4j</groupId>
-				<artifactId>log4j</artifactId>
-				<version>1.2.14</version>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
-
-
 
 	<!-- Dependency definitions -->
 	<dependencies>
+        <!--  HELIO client API -->
+        <dependency>
+          <groupId>eu.heliovo</groupId>
+          <artifactId>helio-clientapi</artifactId>
+          <version>5.0-SNAPSHOT</version>
+        </dependency>
+  
+        <!-- HELIO Shared - Utilities -->
+        <dependency>
+            <groupId>eu.heliovo</groupId>
+            <artifactId>helio-shared</artifactId>
+            <version>5.0-SNAPSHOT</version>
+        </dependency>
+  
+  
 		<!-- Apache CXF dependencies -->
 		<dependency>
 			<groupId>org.apache.cxf</groupId>
 			<artifactId>cxf-rt-frontend-jaxws</artifactId>
 			<version>${cxf.version}</version>
+			<exclusions>
+			  <exclusion>
+			    <artifactId>spring-context</artifactId>
+			    <groupId>org.springframework</groupId>
+			  </exclusion>
+			  <exclusion>
+			    <artifactId>spring-beans</artifactId>
+			    <groupId>org.springframework</groupId>
+			  </exclusion>
+			  <exclusion>
+			    <artifactId>spring-core</artifactId>
+			    <groupId>org.springframework</groupId>
+			  </exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.cxf</groupId>
 			<artifactId>cxf-rt-transports-http</artifactId>
 			<version>${cxf.version}</version>
+			<exclusions>
+			  <exclusion>
+			    <artifactId>spring-web</artifactId>
+			    <groupId>org.springframework</groupId>
+			  </exclusion>
+			</exclusions>
 		</dependency>
 		<!-- Spring Dependencies, added from Donal's example (https://grid.ie/helio/wiki/SpringSecurityNotes) -->
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-web</artifactId>
-			<version>${spring-version}</version>
-		</dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring-version}</version>
+            <exclusions>
+              <exclusion>
+                <artifactId>aopalliance</artifactId>
+                <groupId>aopalliance</groupId>
+              </exclusion>
+              <exclusion>
+                <artifactId>spring-context</artifactId>
+                <groupId>org.springframework</groupId>
+              </exclusion>
+              <exclusion>
+                <artifactId>spring-beans</artifactId>
+                <groupId>org.springframework</groupId>
+              </exclusion>
+              <exclusion>
+                <artifactId>spring-aop</artifactId>
+                <groupId>org.springframework</groupId>
+              </exclusion>
+              <exclusion>
+                <artifactId>spring-expression</artifactId>
+                <groupId>org.springframework</groupId>
+              </exclusion>
+              <exclusion>
+                <artifactId>spring-security-core</artifactId>
+                <groupId>org.springframework.security</groupId>
+              </exclusion>
+              <exclusion>
+                <artifactId>spring-tx</artifactId>
+                <groupId>org.springframework</groupId>
+              </exclusion>
+              <exclusion>
+                <artifactId>spring-web</artifactId>
+                <groupId>org.springframework</groupId>
+              </exclusion>
+              <exclusion>
+                <artifactId>spring-core</artifactId>
+                <groupId>org.springframework</groupId>
+              </exclusion>
+              <exclusion>
+                <artifactId>spring-jdbc</artifactId>
+                <groupId>org.springframework</groupId>
+              </exclusion>
+            </exclusions>
+        </dependency>
+    
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
 			<version>${spring-version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-aop</artifactId>
-			<version>${spring-version}</version>
+			<exclusions>
+			  <exclusion>
+			    <artifactId>aopalliance</artifactId>
+			    <groupId>aopalliance</groupId>
+			  </exclusion>
+			  <exclusion>
+			    <artifactId>spring-aop</artifactId>
+			    <groupId>org.springframework</groupId>
+			  </exclusion>
+			  <exclusion>
+			    <artifactId>spring-beans</artifactId>
+			    <groupId>org.springframework</groupId>
+			  </exclusion>
+			  <exclusion>
+			    <artifactId>spring-context</artifactId>
+			    <groupId>org.springframework</groupId>
+			  </exclusion>
+			  <exclusion>
+			    <artifactId>spring-security-core</artifactId>
+			    <groupId>org.springframework.security</groupId>
+			  </exclusion>
+			  <exclusion>
+			    <artifactId>spring-core</artifactId>
+			    <groupId>org.springframework</groupId>
+			  </exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>cglib</groupId>
@@ -239,17 +265,8 @@
 		</dependency>
 
 		<!-- End of Spring Dependencies, added from Donal's example (https://grid.ie/helio/wiki/SpringSecurityNotes) -->
-
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-core</artifactId>
-			<version>${spring-version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-web</artifactId>
-			<version>${spring-version}</version>
-		</dependency>
+    
+    
 
 		<!-- Testing -->
 		<dependency>
@@ -257,13 +274,6 @@
 			<artifactId>junit</artifactId>
 			<version>${junit-version}</version><!--$NO-MVN-MAN-VER$-->
 			<scope>test</scope>
-		</dependency>
-
-		<!-- HELIO Shared - Utilities -->
-		<dependency>
-			<groupId>eu.heliovo</groupId>
-			<artifactId>helio-shared</artifactId>
-			<version>5.0-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 </project>
