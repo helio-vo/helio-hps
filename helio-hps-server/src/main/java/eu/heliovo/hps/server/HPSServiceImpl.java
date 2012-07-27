@@ -8,14 +8,11 @@ import eu.heliovo.hps.server.application.ApplicationRepository;
 import eu.heliovo.hps.server.application.DummyApplicationRepository;
 import eu.heliovo.hps.server.application.ProcessingEngineException;
 import eu.heliovo.hps.server.application.SimpleApplicationEngine;
-import eu.heliovo.shared.common.utilities.LogUtilities;
+import eu.heliovo.shared.common.LogUtils;
+import eu.heliovo.shared.util.ServiceStatus;
 
 public class HPSServiceImpl implements HPSService 
 {
-	/*
-	 * Various Utilities
-	 */
-	LogUtilities				logUtilities	=	new LogUtilities();
 	/*
 	 * The repository of the applications
 	 */
@@ -28,14 +25,22 @@ public class HPSServiceImpl implements HPSService
 	@Override
 	public String test(String arg) 
 	{
-		logUtilities.printShortLogEntry("HPSServiceImpl.test(...)");
+		LogUtils.printShortLogEntry("HPSServiceImpl.test(...)");
 		return arg;
+	}
+
+	
+	@Override
+	public String getStatus() throws HPSServiceException 
+	{
+		LogUtils.printShortLogEntry("[HPS-SERVER] - Executing getStatus()...");		
+		return ServiceStatus.OK;        
 	}
 
 	@Override
 	public Collection<AbstractApplicationDescription> getPresentApplications() 
 	{
-		logUtilities.printShortLogEntry("HPSServiceImpl.getPresentApplications()");
+		LogUtils.printShortLogEntry("HPSServiceImpl.getPresentApplications()");
 		return appRepository.getPresentApplications();
 	}
 
@@ -49,7 +54,7 @@ public class HPSServiceImpl implements HPSService
 		/*
 		 * TODO : Remove comments...
 		 */
-		logUtilities.printShortLogEntry("HPSServiceImpl.executeApplication(...)");
+		LogUtils.printShortLogEntry("HPSServiceImpl.executeApplication(...)");
 //		logUtilities.printLongLogEntry("Executing the following application : " + app.getFullDescription());		
 //		logUtilities.printLongLogEntry(" xxx " + app.getParameters());
 		
@@ -70,14 +75,14 @@ public class HPSServiceImpl implements HPSService
 	@Override
 	public String getStatusOfExecution(String exeId) 
 	{
-		logUtilities.printShortLogEntry("HPSServiceImpl.getStatusOfExecution(...)");
+		LogUtils.printShortLogEntry("HPSServiceImpl.getStatusOfExecution(...)");
 		return appEngine.getStatusOfExecution(exeId);
 	}
 
 	@Override
 	public String getOutputOfExecution(String exeId) throws HPSServiceException 
 	{
-		logUtilities.printShortLogEntry("HPSServiceImpl.getOutputOfExecution(...)");
+		LogUtils.printShortLogEntry("HPSServiceImpl.getOutputOfExecution(...)");
 		return "http://cagnode58.cs.tcd.ie/output_dir/"+exeId;
 		// return appEngine.getOutputOfExecution(exeId);
 	}	

@@ -22,6 +22,14 @@ public interface HPSService
 	@WebResult(name="testResult")
 	public	String	test(@WebParam(name="testParameter") String testParemeter);	
 	/**
+	 * getStatus
+	 *
+	 * @throws HPSServiceException 
+	 */
+	@WebMethod
+	@WebResult(name="getStatusResult")
+	String getStatus() throws HPSServiceException;
+	/**
 	 * getPresentApplications
 	 * 
 	 * @return Returns a collection that contains all the applications present in the HPS
