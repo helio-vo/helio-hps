@@ -39,7 +39,7 @@ public class HecCallDemo {
         QueryService hecService = (QueryService) helioClient.getServiceInstance(HelioServiceName.HEC, null, null);
         
         // now comes the acutal query.
-        HelioQueryResult resultObject = hecService.query("2002-12-01T00:00:00", "2002-12-12T00:00:00", "goes_sxr_flare", "", -1, 0, null);
+        HelioQueryResult resultObject = hecService.query("2002-12-01T00:00:00", "2002-12-12T00:00:00", "goes_sxr_flare", -1, 0, null);
         
         // inspect the result
         // get a url to the VOTable (will be stored locally in user.home/.helio/...)
