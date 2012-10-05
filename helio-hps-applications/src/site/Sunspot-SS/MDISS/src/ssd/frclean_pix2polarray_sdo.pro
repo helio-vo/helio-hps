@@ -32,8 +32,9 @@ FOR i=0, Rmax-1 DO BEGIN
 		theta = j * ((2*!DPI)/(image1x-1))
 		x = i * COS(theta)
 		y = i * SIN(theta)
-		X= fix(x+xc+0.5)
-		Y= fix(y+yc+0.5)
+		X= fix(x+xc+0.5)>(0l)<(image1x-1l)
+		Y= fix(y+yc+0.5)>(0l)<(image1y-1l)
+
 		pixel_array(j,i) = image(X,Y)
 	ENDFOR
 ENDFOR

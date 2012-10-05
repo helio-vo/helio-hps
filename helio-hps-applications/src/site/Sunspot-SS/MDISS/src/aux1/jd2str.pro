@@ -19,7 +19,10 @@
 ;					0 - str = 'YYYY-MM-DD HH:NN:SS' (default)
 ;					1 - str = 'YYYY-MM-DDTHH:NN:SS'
 ;				    2 - str = 'YYYY-MM-DDTHH:NN:SS.SSS'
-;					3 - str = 'YYYY-MM-DD HH:MM:SS.SSS'
+;					3 - str = 'YYYY-MM-DD HH:NN:SS.SSS'
+;					4 - str = 'YYYY.MM.DD_HH_NN_SS'
+;					5 - str = 'YYYY.MM.DD_HH:MM:SS'
+;					6 - str = 'YYYY.MM.DD_HH.MM.SS'
 ;
 ; KEYWORD PARAMETERS:
 ;		None.
@@ -57,12 +60,23 @@ str = strarr(n)
 for i=0l,n-1l do begin 
 	caldat,jd[i],mm,dd,yy,hh,nn,ss 
  
- 	sec = string(ss,format='(i2.2)')
- 	if (form eq 0) or (form eq 2) then sep = 'T' else sep = ' '
- 	if (form eq 2) or (form eq 3) then sec = sec + '.' + string((ss-long(ss))*1.e3,format='(i3.3)')
- 
-	str[i] = string(yy,format='(i4.4)') + '-' + string(mm,format='(i2.2)') + '-' + string(dd,format='(i2.2)') $
-		  + sep +string(hh,format='(i2.2)') + ':' + string(nn,format='(i2.2)') + ':' + sec
+	hh = string(hh,format='(i2.2)')
+	nn = string(nn,format='(i2.2)')
+ 	ss = string(ss,format='(i2.2)')
+	dd = string(dd,format='(i2.2)')
+	mm = string(mm,format='(i2.2)') 	
+	yy = string(yy,format='(i4.4)')
+	fs = string((ss-long(ss))*1.e3,format='(i3.3)')
+
+	case form of
+		1:str[i] = YY+'-'+MM+'-'+DD+'T'+HH+':'+NN+':'+SS
+		2:str[i] = YY+'-'+MM+'-'+DD+'T'+HH+':'+NN+':'+SS+'.'+FS
+		3:str[i] = YY+'-'+MM+'-'+DD+' '+HH+':'+NN+':'+SS+'.'+FS
+		4:str[i] = YY+'.'+MM+'.'+DD+'_'+HH+'_'+NN+'_'+SS
+		5:str[i] = YY+'.'+MM+'.'+DD+'_'+HH+':'+NN+':'+SS
+		6:str[i] = YY+'.'+MM+'.'+DD+'_'+HH+'.'+NN+'.'+SS
+		else:str[i] = YY+'-'+MM+'-'+DD+' '+HH+':'+NN+':'+SS
+	endcase
 endfor
 if (n eq 1) then str = str[0] 
  
