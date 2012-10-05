@@ -1,14 +1,20 @@
-============
-readme MDISS
-============
-X.bonnin, 10-JAN-2012
+----------------
+ /mdiss readme file
+----------------
+X.Bonnin, 16-SEP-2012
 
-This folder contains all the files required to run the MDISS code:
-		
-		- /archives		contains the old software version.
-		- /products 	used to saved output files.
-		- /src 			contains the source files of the code. 
-		- /tools        used to stored any routine useful for the code.
+ The /mdiss root directory contains all of the files and documents required 
+ to run the SDO SunSpot detection code.
 
-To launch the code run mdi_ss_finding_observations.pro routine (NOTE: SSW gen library must be loaded before launching the program). A batch file mdi_ss_launcher.batch can also be used to run the software using a script file.
-For more details about the files produced, see HELIO_Feature_Description_SunSpots.pdf.
+ The /mdiss directory must include the following folders:
+
+ /bin       used to store binary files that permit to run mdiss.
+ /data      used to store sdo/hmi observation files.
+ /doc       contains any document related to mdiss.
+ /history   used to save history files produced by the mdiss_hfc_processing script.
+ /lib       used to store any additionnal libraries
+ /logs      used to save log files produced during code executions.
+ /products  used to save the files produced by the code.
+ /scripts   contains scripts that can be used to run mdiss.
+ /src       contains the mdiss source files (written in IDL).
+ /tools     contains any additional useful programs.

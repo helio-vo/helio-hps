@@ -1,0 +1,80 @@
+----------------
+ How to run mdiss?
+----------------
+X.Bonnin, 16-SEP-2012
+
+Note: before running mdiss, make sure that SolarSoftware (SSW) with
+         the sdo, vso, and ontology packages is installed on your
+         system, and that the corresponding environment variables are
+         correctly set. (For more details about SSW, 
+	 visit http://www.lmsal.com/solarsoft/.)
+
+FROM IDL
+---------------
+
+    mdiss_processing.pro:	This is the main IDL routine to run
+                                                mdiss. It is located
+                                                in the /mdiss/src
+                                                folder, and can be
+                                                launched from an IDL
+                                                interpreter
+                                                session. (To have the
+                                                list of input
+                                                arguments, please read
+                                                the file's header)
+
+    mdiss_launcher.batch:         IDL batch script located in the
+      			     	                /mdiss/scripts folder.
+      			     	                To run mdiss from the
+      			     	                IDL interpreter, first
+      			     	                edit the file with
+      			     	                wanted input arguments, 
+				                then from the prompt, 
+						enter the following command: 
+				                       IDL>@mdiss_launcher.batch  
+
+    mdiss_processing.sav         Binary file that permits to run mdiss
+    				 	       in the IDL runtime
+    				 	       mode. The
+    				 	       mdiss_make_bin.batch,
+    				 	       provided in
+    				 	       /mdiss/scripts folder,
+    				 	       can be used to generate
+    				 	       this file. By default,
+    				 	       this file is saved in
+    				 	       the /mdiss/bin folder.
+                                               (See mdiss_launcher.csh script
+    				 	       for an example of use,
+    				 	       and the IDL documentation for
+			                       more information about the IDL runtime mode.)
+
+FROM UNIX
+---------------
+
+      mdiss_launcher.csh:    Simple csh script file to run mdiss
+      			                  calling the bin/mdiss_processing.sav
+      			                  IDL script.
+			                   
+FROM PYTHON
+---------------
+
+      mdiss_hfc_processing.py  Python script to run mdiss in IDL
+			                       runtime mode.
+			                       This script allows
+			                       parallelized executions
+			                       using threading
+			                       processes. This script
+			                       is designed to be used in the framework of the 
+      			                       Heliophysics Feature Catalogue (HFC) pipeline.
+
+FROM TORQUE
+---------------
+
+      mdiss_job.pbs:	       PBS script to submit a mdiss execution
+      			               to a Torque resource manager.
+      			               (For more information about job submission on the siolino server, 
+                                        see
+      			               http://dio.obspm.fr/fichiersHTML/PBS.html#section4.)
+			     
+ 
+ 
