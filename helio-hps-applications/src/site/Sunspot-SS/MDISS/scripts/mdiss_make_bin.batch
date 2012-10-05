@@ -1,0 +1,22 @@
+;IDL batch file to make a idl runtime binary file
+;mdiss_processing.sav
+;soho, mdi, vso, and ontology SSW packages must be loaded before
+;running this script.
+;X.Bonnin, 13-APR-2012
+src_dir = '../src'
+
+pathsep = path_sep(/search_path) 
+!PATH = expand_path('+'+src_dir) + pathsep + !PATH
+
+cd,src_dir,current=cur_dir
+.compile fulldiskobs__rot2sync
+proname= ['mdiss_processing']
+funcname = ['get_orbit','strsplit']
+classname=['hfc_observations', 'hfc_observatory', 'hfc_frc_info', $
+		   'hfc_pp_info', 'hfc_sunspots', 'hfc_pp_output', $
+		   'wlfitsfdobs','ftsfile','mgfitsfdobs','FitsFDobs', $
+		   'fulldiskobs', 'SunspotObs', $
+		   'sunspotmgobs','feature','sunspot']
+resolve_all, /CONTINUE_ON_ERROR, class=classname, resolve_procedure=proname, resolve_function=funcname
+save, /ROUTINES, filename='../bin/mdiss_processing.sav', description='Runtime IDL program to call mdiss_processing.pro', /VERBOSE, /EMBEDDED
+cd,cur_dir

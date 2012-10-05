@@ -1,0 +1,31 @@
+;mdi_ss_launcher.batch
+;IDL batch file to launch mdiss_processing.pro
+;SolarSoftWare with mdi, soho, and ontology packages must be loaded.
+;
+;To run the batch file on an idl session -> @mdiss_launcher.batch
+;
+;X.Bonnin, 01-MAY-2012
+
+!QUIET=1
+
+;Define paths
+src_dir = '../src' ;-> Source directory
+data_dir = '../data' 					  ;-> SOHO/MDI local data directory
+output_dir = '../products' 					  ;-> Products (png, csv, fits, etc.) directory
+
+;Add extra directories to !PATH variable 
+pathsep = PATH_SEP(/SEARCH_PATH) 
+!PATH = expand_path('+'+src_dir) + pathsep + !PATH
+
+
+fnc = '../data/fd_Ic_6h_01d.3244.0001.fits'
+fnm = '../data/fd_M_96m_01d.3244.0005.fits'
+
+write_png = 4
+
+.compile mdiss_processing
+mdiss_processing,fnc,fnm,$
+		output_dir=output_dir,$
+		write_png=write_png, $
+	        /UNPROCESSED,/NO_SHOW, $
+                /VERBOSE, /WRITE_CSV
