@@ -1,0 +1,86 @@
+----------------
+ How to run sdoss?
+----------------
+X.Bonnin, 16-SEP-2012
+
+Note: before running sdoss, make sure that SolarSoftware (SSW) with
+         the sdo, vso, and ontology packages is installed on your
+         system, and that the corresponding environment variables are
+         correctly set. (For more details about SSW, 
+	 visit http://www.lmsal.com/solarsoft/.)
+
+FROM IDL
+---------------
+
+    sdoss_processing.pro:	This is the main IDL routine to run
+                                                sdoss. It is located
+                                                in the /sdoss/src
+                                                folder, and can be
+                                                launched from an IDL
+                                                interpreter
+                                                session. (To have the
+                                                list of input
+                                                arguments, please read
+                                                the file's header)
+
+    sdoss_launcher.batch:         IDL batch script located in the
+      			     	                /sdoss/scripts folder.
+      			     	                To run sdoss from the
+      			     	                IDL interpreter, first
+      			     	                edit the file with
+      			     	                wanted input arguments, 
+				                then from the prompt, 
+						enter the following command: 
+				                       IDL>@sdoss_launcher.batch  
+
+    sdoss_processing.sav         Binary file that permits to run sdoss
+    				 	       in the IDL runtime
+    				 	       mode. The
+    				 	       sdoss_make_bin.batch,
+    				 	       provided in
+    				 	       /sdoss/scripts folder,
+    				 	       can be used to generate
+    				 	       this file. By default,
+    				 	       this file is saved in
+    				 	       the /sdoss/bin folder.
+                                               (See sdoss_launcher.csh script
+    				 	       for an example of use,
+    				 	       and the IDL documentation for
+			                       more information about the IDL runtime mode.)
+
+FROM UNIX
+---------------
+
+      sdoss_launcher.csh:    Simple csh script file to run sdoss
+      			                  calling the bin/sdoss_processing.sav
+      			                  IDL script.
+			                   
+FROM PYTHON
+---------------
+
+      sdoss_hfc_processing.py  Python script to run sdoss in IDL
+			                       runtime mode.
+			                       This script allows
+			                       parallelized executions
+			                       using threading
+			                       processes. This script
+			                       is designed to be used in the framework of the 
+      			                       Heliophysics Feature Catalogue (HFC) pipeline.
+
+FROM TORQUE
+---------------
+
+      sdoss_job.pbs:	       PBS script to submit a sdoss execution
+      			               to a Torque resource manager.
+      			               (For more information about job submission on the siolino server, 
+                                        see
+      			               http://dio.obspm.fr/fichiersHTML/PBS.html#section4.)
+
+      cron_sdoss_job.pbs       PBS script to submit sdoss execution to
+                                            a Torque manager using crontab.
+                                            (Used on siolino server to
+                                            process latest sdo/hmi
+                                            observations for the HFC.) 
+			     
+ 
+ 
