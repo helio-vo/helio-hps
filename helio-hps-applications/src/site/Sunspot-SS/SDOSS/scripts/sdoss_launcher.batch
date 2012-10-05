@@ -1,0 +1,44 @@
+;Sdoss_launcher.batch
+;Idl Batch File To Launch Sdo_Ss_Launcher.Pro
+;Solarsoftware With Vso, Sdo, And Ontlogy Packages Must Be Loaded.
+;
+;To Run The Batch File On An Idl Session -> @Sdo_Ss_Launcher.Batch
+;
+;X.Bonnin, 10-FEB-2012
+
+;Define Paths
+src_dir = '../src'
+data_dir = '../data'
+product_dir = '../products'
+
+;Add To !Path Variable Or Compile Extra Idl Routines Required To Run The Code
+pathsep = path_sep(/search_path) 
+!PATH = expand_path('+'+src_dir) + pathsep + !PATH
+
+;Input options
+VERBOSE = 1
+DEBUG = 0
+LOG = 0
+CSV = 1
+QCLK=1
+
+;Define files Process
+sep = path_sep()
+fnc = data_dir + sep + 'hmi.ic_45s.2012.01.01_16:00:00_TAI.continuum.fits'
+fnm = data_dir + sep + 'hmi.m_45s.2012.01.01_16:00:00_TAI.magnetogram.fits'
+
+;Scale factor
+scf=1 ;Full resolution
+;scf=4 ;SOHO/MDI
+
+;Sunspot minimum area (in pixels)
+feat_min_pix = 9
+
+;Compile sdoss routines
+;@compile_sdoss
+sdoss_processing,fnc, fnm, scf=scf, $
+	         output_dir=product_dir,$
+	         write_fits=write_fits,$
+	         feat_min_pix=feat_min_pix, $ 
+                 LOG=LOG,VERBOSE=VERBOSE, $
+	         DEBUG=DEBUG,CSV=CSV,QUICKLOOK=QCLK
